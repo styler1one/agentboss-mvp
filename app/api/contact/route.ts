@@ -72,7 +72,7 @@ export async function POST(request: NextRequest) {
     // Determine email template based on variant
     const getEmailTemplate = (variant: string, data: typeof validatedData) => {
       const baseTemplate = {
-        from: 'AgentBoss.nl <noreply@agentboss.nl>',
+        from: 'onboarding@resend.dev', // Use Resend's verified domain
         to: ['info@agentboss.nl'],
         replyTo: data.email,
       }
@@ -162,14 +162,23 @@ export async function POST(request: NextRequest) {
     }
     
     // Send email notification
+    let emailSuccess = false
     if (resend) {
-      const emailTemplate = getEmailTemplate(validatedData.variant, validatedData)
-      await resend.emails.send(emailTemplate)
+      try {
+        const emailTemplate = getEmailTemplate(validatedData.variant, validatedData)
+        const emailResult = await resend.emails.send(emailTemplate)
+        console.log('Sales email sent:', emailResult.data?.id)
+        emailSuccess = true
+      } catch (emailError) {
+        console.error('Sales email error:', emailError)
+      }
+    } else {
+      console.log('Resend not configured - skipping sales email')
     }
     
     // Send confirmation email to user
     const confirmationEmail = {
-      from: 'AgentBoss.nl <noreply@agentboss.nl>',
+      from: 'onboarding@resend.dev', // Use Resend's verified domain
       to: [validatedData.email],
       subject: 'Bevestiging: Je aanvraag is ontvangen - AgentBoss.nl',
       html: `
@@ -203,7 +212,12 @@ export async function POST(request: NextRequest) {
     }
     
     if (resend) {
-      await resend.emails.send(confirmationEmail)
+      try {
+        const confirmationResult = await resend.emails.send(confirmationEmail)
+        console.log('Confirmation email sent:', confirmationResult.data?.id)
+      } catch (confirmationError) {
+        console.error('Confirmation email error:', confirmationError)
+      }
     }
     
     // Return success response
