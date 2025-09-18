@@ -214,7 +214,7 @@ export default function CaseStudiesSection() {
                     <PlayCircle className="w-5 h-5 mr-2" />
                     Bekijk Video Case Study
                   </Button>
-                  <Button variant="outline" size="lg" className="w-full border-white text-white hover:bg-white hover:text-agent-navy">
+                  <Button variant="outline-white" size="lg" className="w-full">
                     <FileText className="w-5 h-5 mr-2" />
                     Download Volledige Case Study
                   </Button>
@@ -318,7 +318,7 @@ export default function CaseStudiesSection() {
                 <TrendingUp className="w-5 h-5 mr-2" />
                 Start jouw Success Story
               </Button>
-              <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-agent-navy">
+              <Button variant="outline-white" size="lg">
                 Bekijk Alle Case Studies
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>

@@ -448,7 +448,7 @@ export default function AgentMarketplace() {
                   <Users className="w-5 h-5 mr-2" />
                   Custom Agent Aanvragen
                 </Button>
-                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-agent-navy">
+                <Button variant="outline-white" size="lg">
                   Bekijk Alle 50+ Agents
                 </Button>
               </div>

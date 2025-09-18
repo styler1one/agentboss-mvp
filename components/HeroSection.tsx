@@ -88,7 +88,7 @@ export default function HeroSection() {
                 Start je AI Agent
                 <CheckCircle className="w-5 h-5 ml-2" />
               </Button>
-              <Button size="xl" variant="outline" className="text-lg border-white text-white hover:bg-white hover:text-agent-navy">
+              <Button size="xl" variant="outline-white" className="text-lg">
                 Bekijk Demo
               </Button>
             </div>

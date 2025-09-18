@@ -206,7 +206,7 @@ export default function FAQSection() {
                 <Button variant="secondary" size="lg">
                   💬 Chat met Expert
                 </Button>
-                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-agent-navy">
+                <Button variant="outline-white" size="lg">
                   📞 Bel ons: +31 20 123 4567
                 </Button>
               </div>
