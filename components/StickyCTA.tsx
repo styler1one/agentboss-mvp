@@ -4,10 +4,12 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { X, Zap, Clock, Phone } from "lucide-react"
+import ContactModal from "@/components/ContactModal"
 
 export default function StickyCTA() {
   const [isVisible, setIsVisible] = useState(false)
   const [isMinimized, setIsMinimized] = useState(false)
+  const [showContactModal, setShowContactModal] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,6 +51,7 @@ export default function StickyCTA() {
                 variant="secondary" 
                 size="lg"
                 className="bg-agent-green hover:bg-green-600 text-white font-semibold"
+                onClick={() => setShowContactModal(true)}
               >
                 <Phone className="w-4 h-4 mr-2" />
                 Start Gratis Assessment
@@ -79,6 +82,13 @@ export default function StickyCTA() {
           </div>
         </div>
       )}
+
+      <ContactModal
+        isOpen={showContactModal}
+        onClose={() => setShowContactModal(false)}
+        type="assessment"
+        title="Gratis AI Assessment"
+      />
     </div>
   )
 }

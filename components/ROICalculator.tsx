@@ -6,12 +6,16 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Slider } from "@/components/ui/slider"
 import { Calculator, TrendingUp, Clock, Euro, CheckCircle } from "lucide-react"
+import ROIReportModal from "@/components/ROIReportModal"
+import ContactModal from "@/components/ContactModal"
 
 export default function ROICalculator() {
   const [employees, setEmployees] = useState([50])
   const [avgSalary, setAvgSalary] = useState([60000])
   const [hoursPerWeek, setHoursPerWeek] = useState([10])
   const [showResults, setShowResults] = useState(false)
+  const [showROIReport, setShowROIReport] = useState(false)
+  const [showContactModal, setShowContactModal] = useState(false)
 
   // ROI Calculations
   const annualCost = employees[0] * avgSalary[0] * (hoursPerWeek[0] / 40)
@@ -230,7 +234,12 @@ export default function ROICalculator() {
                         <div>✅ Implementation plan</div>
                       </div>
                     </div>
-                    <Button variant="secondary" size="lg" className="bg-white text-green-600 hover:bg-gray-100">
+                    <Button 
+                      variant="secondary" 
+                      size="lg" 
+                      className="bg-white text-green-600 hover:bg-gray-100"
+                      onClick={() => setShowROIReport(true)}
+                    >
                       📥 Download Gratis ROI Report
                     </Button>
                     <div className="text-xs text-green-200">
@@ -247,11 +256,21 @@ export default function ROICalculator() {
                       Book een gratis 30-min consultatie en ontvang een gepersonaliseerd implementatieplan
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                      <Button variant="secondary" size="lg">
+                      <Button 
+                        variant="secondary" 
+                        size="lg"
+                        onClick={() => setShowContactModal(true)}
+                      >
                         <Clock className="w-5 h-5 mr-2" />
                         Book Gratis Consultatie
                       </Button>
-                      <Button variant="outline-white" size="lg">
+                      <Button 
+                        variant="outline-white" 
+                        size="lg"
+                        onClick={() => {
+                          document.getElementById('cases')?.scrollIntoView({ behavior: 'smooth' })
+                        }}
+                      >
                         Bekijk Success Stories
                       </Button>
                     </div>
@@ -291,6 +310,27 @@ export default function ROICalculator() {
           </div>
         </div>
       </div>
+
+      {/* Modals */}
+      <ROIReportModal
+        isOpen={showROIReport}
+        onClose={() => setShowROIReport(false)}
+        roiData={{
+          roi,
+          paybackMonths,
+          annualSavings,
+          employees: employees[0],
+          salary: avgSalary[0],
+          hours: hoursPerWeek[0]
+        }}
+      />
+
+      <ContactModal
+        isOpen={showContactModal}
+        onClose={() => setShowContactModal(false)}
+        type="consultation"
+        title="Gratis 30-min Consultatie"
+      />
     </section>
   )
 }

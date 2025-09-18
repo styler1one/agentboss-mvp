@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { TrendingUp, ArrowRight, PlayCircle, FileText } from "lucide-react"
+import VideoModal from "@/components/VideoModal"
+import ContactModal from "@/components/ContactModal"
 
 const caseStudies = [
   {
@@ -86,11 +88,42 @@ const industries = ["Alle", "SaaS", "Logistics", "Fintech", "Manufacturing", "He
 
 export default function CaseStudiesSection() {
   const [selectedIndustry, setSelectedIndustry] = useState("Alle")
-  // const [selectedCase, setSelectedCase] = useState<number | null>(null)
+  const [selectedVideo, setSelectedVideo] = useState<{
+    id: string
+    title: string
+    company: string
+    person: string
+    role: string
+    duration: string
+    thumbnail: string
+    description: string
+    results: {
+      roi: string
+      savings: string
+      timeframe: string
+    }
+  } | null>(null)
+  const [showContactModal, setShowContactModal] = useState(false)
 
   const filteredCases = caseStudies.filter(cs => 
     selectedIndustry === "Alle" || cs.industry === selectedIndustry
   )
+
+  const getVideoData = (caseStudy: typeof caseStudies[0]) => ({
+    id: caseStudy.id.toString(),
+    title: `${caseStudy.company} Success Story`,
+    company: caseStudy.company,
+    person: caseStudy.person.name,
+    role: caseStudy.person.title,
+    duration: "2:34",
+    thumbnail: caseStudy.person.avatar,
+    description: caseStudy.quote,
+    results: {
+      roi: caseStudy.results.roi,
+      savings: caseStudy.results.savings,
+      timeframe: caseStudy.results.timeframe
+    }
+  })
 
   return (
     <section id="cases" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
@@ -210,11 +243,27 @@ export default function CaseStudiesSection() {
                 </div>
 
                 <div className="space-y-3">
-                  <Button variant="secondary" size="lg" className="w-full">
+                  <Button 
+                    variant="secondary" 
+                    size="lg" 
+                    className="w-full"
+                    onClick={() => setSelectedVideo(getVideoData(caseStudy))}
+                  >
                     <PlayCircle className="w-5 h-5 mr-2" />
                     Bekijk Video Case Study
                   </Button>
-                  <Button variant="outline-white" size="lg" className="w-full">
+                  <Button 
+                    variant="outline-white" 
+                    size="lg" 
+                    className="w-full"
+                    onClick={() => {
+                      // Simulate PDF download
+                      const link = document.createElement('a')
+                      link.href = '#'
+                      link.download = `${caseStudy.company}-case-study.pdf`
+                      link.click()
+                    }}
+                  >
                     <FileText className="w-5 h-5 mr-2" />
                     Download Volledige Case Study
                   </Button>
@@ -273,11 +322,26 @@ export default function CaseStudiesSection() {
                 </div>
 
                 <div className="flex gap-2 pt-2">
-                  <Button variant="outline" size="sm" className="flex-1">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="flex-1"
+                    onClick={() => setSelectedVideo(getVideoData(caseStudy))}
+                  >
                     <PlayCircle className="w-4 h-4 mr-1" />
                     Video
                   </Button>
-                  <Button variant="outline" size="sm" className="flex-1">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="flex-1"
+                    onClick={() => {
+                      const link = document.createElement('a')
+                      link.href = '#'
+                      link.download = `${caseStudy.company}-case-study.pdf`
+                      link.click()
+                    }}
+                  >
                     <FileText className="w-4 h-4 mr-1" />
                     PDF
                   </Button>
@@ -314,7 +378,12 @@ export default function CaseStudiesSection() {
                 </div>
               </div>
 
-              <Button variant="secondary" size="lg" className="mr-4">
+              <Button 
+                variant="secondary" 
+                size="lg" 
+                className="mr-4"
+                onClick={() => setShowContactModal(true)}
+              >
                 <TrendingUp className="w-5 h-5 mr-2" />
                 Start jouw Success Story
               </Button>
@@ -326,6 +395,22 @@ export default function CaseStudiesSection() {
           </Card>
         </div>
       </div>
+
+      {/* Modals */}
+      {selectedVideo && (
+        <VideoModal
+          isOpen={!!selectedVideo}
+          onClose={() => setSelectedVideo(null)}
+          video={selectedVideo}
+        />
+      )}
+
+      <ContactModal
+        isOpen={showContactModal}
+        onClose={() => setShowContactModal(false)}
+        type="consultation"
+        title="Start jouw Success Story"
+      />
     </section>
   )
 }
