@@ -204,6 +204,7 @@ export default function SolutionsSection() {
                         solution.id === 1 ? "/agent-factory" : 
                         solution.id === 2 ? "/expert-ecosystem" : 
                         solution.id === 3 ? "/agent-marketplace" : 
+                        solution.id === 4 ? "/compliance-center" :
                         "#solutions"
                       }>
                         <Button 

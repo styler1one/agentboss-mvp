@@ -47,7 +47,7 @@ export default function Footer() {
               <li><Link href="/expert-ecosystem" className="hover:text-white transition-colors">Expert Network</Link></li>
               <li><Link href="/agent-marketplace" className="hover:text-white transition-colors">Agent Marketplace</Link></li>
               <li><Link href="#solutions" className="hover:text-white transition-colors">Custom Development</Link></li>
-              <li><Link href="#solutions" className="hover:text-white transition-colors">Compliance Center</Link></li>
+              <li><Link href="/compliance-center" className="hover:text-white transition-colors">Compliance Center</Link></li>
             </ul>
           </div>
 
