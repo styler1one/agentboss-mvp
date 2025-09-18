@@ -50,18 +50,18 @@ export default function Header() {
               >
                 Industries
               </Link>
-              <button
-                onClick={() => handleNavigation('experts')}
+              <Link
+                href="/expert-ecosystem"
                 className="text-gray-600 hover:text-agent-navy transition-colors"
               >
                 Experts
-              </button>
-              <button 
-                onClick={() => handleNavigation('marketplace')}
+              </Link>
+              <Link 
+                href="/agent-marketplace"
                 className="text-gray-600 hover:text-agent-navy transition-colors"
               >
                 Marketplace
-              </button>
+              </Link>
               <button 
                 onClick={() => handleNavigation('cases')}
                 className="text-gray-600 hover:text-agent-navy transition-colors"
@@ -116,24 +116,34 @@ export default function Header() {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t">
             <nav className="flex flex-col space-y-4">
-              <button 
-                onClick={() => handleNavigation('solutions')}
+              <Link 
+                href="/solutions"
                 className="text-gray-600 hover:text-agent-navy text-left"
+                onClick={() => setIsMenuOpen(false)}
               >
                 Solutions
-              </button>
-              <button 
-                onClick={() => handleNavigation('experts')}
+              </Link>
+              <Link 
+                href="/industries"
                 className="text-gray-600 hover:text-agent-navy text-left"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Industries
+              </Link>
+              <Link 
+                href="/expert-ecosystem"
+                className="text-gray-600 hover:text-agent-navy text-left"
+                onClick={() => setIsMenuOpen(false)}
               >
                 Experts
-              </button>
-              <button 
-                onClick={() => handleNavigation('marketplace')}
+              </Link>
+              <Link 
+                href="/agent-marketplace"
                 className="text-gray-600 hover:text-agent-navy text-left"
+                onClick={() => setIsMenuOpen(false)}
               >
                 Marketplace
-              </button>
+              </Link>
               <button 
                 onClick={() => handleNavigation('cases')}
                 className="text-gray-600 hover:text-agent-navy text-left"

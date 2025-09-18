@@ -44,10 +44,10 @@ export default function Footer() {
             <h4 className="font-semibold text-lg">Solutions</h4>
             <ul className="space-y-2 text-sm text-blue-200">
               <li><Link href="/agent-factory" className="hover:text-white transition-colors">Agent Factory</Link></li>
-              <li><Link href="/expert-ecosystem" className="hover:text-white transition-colors">Expert Network</Link></li>
+              <li><Link href="/expert-ecosystem" className="hover:text-white transition-colors">Expert Ecosystem</Link></li>
               <li><Link href="/agent-marketplace" className="hover:text-white transition-colors">Agent Marketplace</Link></li>
-              <li><Link href="#solutions" className="hover:text-white transition-colors">Custom Development</Link></li>
               <li><Link href="/compliance-center" className="hover:text-white transition-colors">Compliance Center</Link></li>
+              <li><Link href="/solutions" className="hover:text-white transition-colors">All Solutions</Link></li>
             </ul>
           </div>
 
@@ -55,11 +55,12 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="font-semibold text-lg">Industries</h4>
             <ul className="space-y-2 text-sm text-blue-200">
-              <li><Link href="#cases" className="hover:text-white transition-colors">Finance & Banking</Link></li>
-              <li><Link href="#cases" className="hover:text-white transition-colors">Healthcare</Link></li>
-              <li><Link href="#cases" className="hover:text-white transition-colors">Manufacturing</Link></li>
-              <li><Link href="#cases" className="hover:text-white transition-colors">Technology & SaaS</Link></li>
-              <li><Link href="#cases" className="hover:text-white transition-colors">E-commerce</Link></li>
+              <li><Link href="/industries/finance" className="hover:text-white transition-colors">Finance & Banking</Link></li>
+              <li><Link href="/industries/healthcare" className="hover:text-white transition-colors">Healthcare & Life Sciences</Link></li>
+              <li><Link href="/industries/manufacturing" className="hover:text-white transition-colors">Manufacturing & Industry</Link></li>
+              <li><Link href="/industries/technology" className="hover:text-white transition-colors">Technology & SaaS</Link></li>
+              <li><Link href="/industries/ecommerce" className="hover:text-white transition-colors">E-commerce & Retail</Link></li>
+              <li><Link href="/industries/logistics" className="hover:text-white transition-colors">Logistics & Transport</Link></li>
             </ul>
           </div>
 
