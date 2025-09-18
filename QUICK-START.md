@@ -1,0 +1,376 @@
+# 🚀 AgentBoss MVP - Quick Start Guide
+
+## Probleem met Dependencies?
+
+Als je errors krijgt, volg deze stappen:
+
+### 1. **Verwijder oude bestanden:**
+```bash
+cd agentboss-mvp
+rm -rf node_modules
+rm package-lock.json
+```
+
+### 2. **Installeer dependencies stap voor stap:**
+```bash
+# Basis Next.js
+npm install next@14.0.4 react@18.2.0 react-dom@18.2.0
+
+# TypeScript
+npm install -D typescript @types/node @types/react @types/react-dom
+
+# Tailwind CSS
+npm install -D tailwindcss postcss autoprefixer
+npm install tailwindcss-animate
+
+# Utility libraries
+npm install clsx tailwind-merge class-variance-authority
+
+# Icons
+npm install lucide-react
+
+# Radix UI (alleen wat we nodig hebben)
+npm install @radix-ui/react-slot @radix-ui/react-avatar @radix-ui/react-label @radix-ui/react-progress @radix-ui/react-slider
+```
+
+### 3. **Start development server:**
+```bash
+npm run dev
+```
+
+## Alternative: Eenvoudige HTML Versie
+
+Als de Next.js setup problemen geeft, hier is een eenvoudige HTML versie:
+
+### Maak: `simple-demo.html`
+```html
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgentBoss.nl - MVP Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'agent-navy': '#0A1628',
+                        'agent-blue': '#00D4FF',
+                        'agent-green': '#10B981'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white border-b sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-gradient-to-br from-agent-blue to-agent-green rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-sm">AB</span>
+                </div>
+                <span class="font-bold text-xl text-agent-navy">AgentBoss.nl</span>
+            </div>
+            <button class="bg-agent-blue text-white px-6 py-2 rounded-lg hover:bg-blue-600">
+                Start je Agent
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-agent-navy to-agent-blue text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-5xl font-bold mb-6">
+                Van AI-chaos naar <span class="text-agent-green">AI-succes</span> in 30 dagen
+            </h1>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">
+                Europa's eerste gegarandeerde AI-agent delivery platform. 
+                Werkende agent binnen 30 werkdagen of 100% geld terug.
+            </p>
+            
+            <!-- Triple Guarantee -->
+            <div class="grid md:grid-cols-3 gap-6 mb-8 max-w-4xl mx-auto">
+                <div class="bg-white/10 rounded-lg p-6 backdrop-blur-sm">
+                    <div class="text-3xl mb-2">⏰</div>
+                    <div class="font-semibold">30 Dagen</div>
+                    <div class="text-sm text-blue-200">Delivery Garantie</div>
+                </div>
+                <div class="bg-white/10 rounded-lg p-6 backdrop-blur-sm">
+                    <div class="text-3xl mb-2">📈</div>
+                    <div class="font-semibold">90 Dagen</div>
+                    <div class="text-sm text-blue-200">ROI Garantie</div>
+                </div>
+                <div class="bg-white/10 rounded-lg p-6 backdrop-blur-sm">
+                    <div class="text-3xl mb-2">🛡️</div>
+                    <div class="font-semibold">ISO27001</div>
+                    <div class="text-sm text-blue-200">Security Garantie</div>
+                </div>
+            </div>
+
+            <button class="bg-agent-green text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-green-600 mr-4">
+                Start je AI Agent
+            </button>
+            <button class="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-agent-navy">
+                Bekijk Demo
+            </button>
+        </div>
+    </section>
+
+    <!-- Live Stats -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-agent-navy">Live Platform Statistics</h2>
+            <div class="grid md:grid-cols-4 gap-8 text-center">
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div class="text-3xl font-bold text-agent-blue mb-2" id="agents-counter">1,247</div>
+                    <div class="text-gray-600">Agents Delivered</div>
+                    <div class="text-xs text-green-600 mt-2">🟢 Live</div>
+                </div>
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div class="text-3xl font-bold text-agent-green mb-2">€12.5M</div>
+                    <div class="text-gray-600">ROI Generated</div>
+                </div>
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div class="text-3xl font-bold text-purple-600 mb-2">95%</div>
+                    <div class="text-gray-600">Success Rate</div>
+                    <div class="text-xs text-gray-500">vs 22% industry</div>
+                </div>
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div class="text-3xl font-bold text-orange-600 mb-2">18</div>
+                    <div class="text-gray-600">Avg. Days</div>
+                    <div class="text-xs text-gray-500">vs 30 guarantee</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Calculator -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-agent-navy">ROI Calculator</h2>
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg p-8 shadow-lg">
+                    <h3 class="text-xl font-semibold mb-6">Jouw Situatie</h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Aantal FTE's</label>
+                            <input type="range" min="1" max="500" value="50" class="w-full" id="employees">
+                            <div class="text-center mt-2 font-semibold" id="employees-value">50 FTE's</div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Gemiddeld jaarsalaris</label>
+                            <input type="range" min="30000" max="150000" value="60000" step="5000" class="w-full" id="salary">
+                            <div class="text-center mt-2 font-semibold" id="salary-value">€60,000</div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Uren per week AI kan overnemen</label>
+                            <input type="range" min="1" max="40" value="10" class="w-full" id="hours">
+                            <div class="text-center mt-2 font-semibold" id="hours-value">10 uur/week</div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="calculateROI()" class="w-full bg-agent-blue text-white py-3 rounded-lg font-semibold mt-6 hover:bg-blue-600">
+                        Bereken mijn ROI
+                    </button>
+                </div>
+                
+                <div class="bg-gradient-to-br from-green-50 to-blue-50 rounded-lg p-8 shadow-lg" id="results" style="display: none;">
+                    <h3 class="text-xl font-semibold mb-6 text-center">Jouw ROI Projectie</h3>
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="text-center bg-white rounded-lg p-4">
+                            <div class="text-2xl font-bold text-agent-green" id="roi-percentage">+340%</div>
+                            <div class="text-sm text-gray-600">ROI Jaar 1</div>
+                        </div>
+                        <div class="text-center bg-white rounded-lg p-4">
+                            <div class="text-2xl font-bold text-agent-blue" id="payback-months">3</div>
+                            <div class="text-sm text-gray-600">Maanden Payback</div>
+                        </div>
+                        <div class="text-center bg-white rounded-lg p-4">
+                            <div class="text-2xl font-bold text-purple-600" id="annual-savings">€75,000</div>
+                            <div class="text-sm text-gray-600">Jaarlijkse Besparing</div>
+                        </div>
+                        <div class="text-center bg-white rounded-lg p-4">
+                            <div class="text-2xl font-bold text-orange-600" id="three-year-net">€150,000</div>
+                            <div class="text-sm text-gray-600">3-Jaar Netto</div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button class="bg-agent-green text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-600">
+                            Book Gratis Consultatie
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expert Network Preview -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-agent-navy">Top 5% AI-experts ter wereld</h2>
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
+                    <div class="w-16 h-16 bg-agent-blue rounded-full mx-auto mb-4 flex items-center justify-center text-white font-bold text-xl">SJ</div>
+                    <h3 class="font-semibold text-lg mb-2">Dr. Sarah Johnson</h3>
+                    <p class="text-gray-600 mb-4">AI Strategy Expert</p>
+                    <div class="flex justify-center mb-4">
+                        <span class="bg-agent-green text-white px-3 py-1 rounded-full text-xs">AgentBoss Master</span>
+                    </div>
+                    <div class="text-sm text-gray-600 mb-4">
+                        ⭐ 4.9 (127 reviews) • €1,200/dag
+                    </div>
+                    <button class="bg-agent-blue text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+                        Selecteer Expert
+                    </button>
+                </div>
+                
+                <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
+                    <div class="w-16 h-16 bg-agent-green rounded-full mx-auto mb-4 flex items-center justify-center text-white font-bold text-xl">MB</div>
+                    <h3 class="font-semibold text-lg mb-2">Mark van der Berg</h3>
+                    <p class="text-gray-600 mb-4">Process Automation</p>
+                    <div class="flex justify-center mb-4">
+                        <span class="bg-gray-500 text-white px-3 py-1 rounded-full text-xs">AgentBoss Expert</span>
+                    </div>
+                    <div class="text-sm text-gray-600 mb-4">
+                        ⭐ 4.8 (89 reviews) • €950/dag
+                    </div>
+                    <button class="bg-agent-blue text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+                        Selecteer Expert
+                    </button>
+                </div>
+                
+                <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
+                    <div class="w-16 h-16 bg-purple-500 rounded-full mx-auto mb-4 flex items-center justify-center text-white font-bold text-xl">LC</div>
+                    <h3 class="font-semibold text-lg mb-2">Lisa Chen</h3>
+                    <p class="text-gray-600 mb-4">Conversational AI</p>
+                    <div class="flex justify-center mb-4">
+                        <span class="bg-gray-500 text-white px-3 py-1 rounded-full text-xs">AgentBoss Expert</span>
+                    </div>
+                    <div class="text-sm text-gray-600 mb-4">
+                        ⭐ 4.9 (156 reviews) • €850/dag
+                    </div>
+                    <button class="bg-agent-blue text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+                        Selecteer Expert
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-agent-navy text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-6">
+                <div class="w-8 h-8 bg-gradient-to-br from-agent-blue to-agent-green rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-sm">AB</span>
+                </div>
+                <span class="font-bold text-xl">AgentBoss.nl</span>
+            </div>
+            <p class="text-blue-200 mb-6 max-w-2xl mx-auto">
+                Europa's eerste gegarandeerde AI-agent delivery platform. 
+                Van AI-chaos naar AI-succes in 30 dagen.
+            </p>
+            <div class="text-sm text-blue-300">
+                © 2024 AgentBoss.nl. Alle rechten voorbehouden.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Live counter animation
+        let agentCount = 1247;
+        setInterval(() => {
+            if (Math.random() > 0.7) {
+                agentCount++;
+                document.getElementById('agents-counter').textContent = agentCount.toLocaleString();
+            }
+        }, 3000);
+
+        // Slider updates
+        document.getElementById('employees').addEventListener('input', function() {
+            document.getElementById('employees-value').textContent = this.value + ' FTE\'s';
+        });
+
+        document.getElementById('salary').addEventListener('input', function() {
+            document.getElementById('salary-value').textContent = '€' + parseInt(this.value).toLocaleString();
+        });
+
+        document.getElementById('hours').addEventListener('input', function() {
+            document.getElementById('hours-value').textContent = this.value + ' uur/week';
+        });
+
+        // ROI Calculation
+        function calculateROI() {
+            const employees = parseInt(document.getElementById('employees').value);
+            const salary = parseInt(document.getElementById('salary').value);
+            const hours = parseInt(document.getElementById('hours').value);
+            
+            const annualCost = employees * salary * (hours / 40);
+            const agentCost = 75000;
+            const efficiency = 0.7;
+            const annualSavings = annualCost * efficiency;
+            const roi = ((annualSavings - agentCost) / agentCost) * 100;
+            const paybackMonths = Math.ceil((agentCost / annualSavings) * 12);
+            const threeYearNet = (annualSavings * 3) - agentCost;
+            
+            document.getElementById('roi-percentage').textContent = '+' + Math.round(roi) + '%';
+            document.getElementById('payback-months').textContent = paybackMonths;
+            document.getElementById('annual-savings').textContent = '€' + Math.round(annualSavings).toLocaleString();
+            document.getElementById('three-year-net').textContent = '€' + Math.round(threeYearNet).toLocaleString();
+            
+            document.getElementById('results').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+```
+
+### Open de HTML file:
+1. Sla bovenstaande code op als `simple-demo.html`
+2. Dubbelklik om te openen in je browser
+3. Volledig werkende demo zonder dependencies!
+
+## Troubleshooting Next.js
+
+### Error: "Cannot find module 'react'"
+```bash
+npm install react@18.2.0 react-dom@18.2.0 --save
+```
+
+### Error: "Module not found: Can't resolve '@/'"
+Controleer of `tsconfig.json` de juiste paths heeft:
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+}
+```
+
+### Error: Tailwind styles niet zichtbaar
+```bash
+npm run dev
+# Restart de development server
+```
+
+## Success Check ✅
+
+Als alles werkt zie je:
+- [ ] AgentBoss.nl logo in header
+- [ ] Hero section met gradient background
+- [ ] Live counter die elke 3 seconden update
+- [ ] Werkende ROI calculator sliders
+- [ ] Expert cards met hover effects
+- [ ] Responsive design op mobile
+
+**De HTML versie werkt gegarandeerd in elke browser! 🚀**
