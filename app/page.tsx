@@ -12,7 +12,7 @@ import FAQSection from '@/components/FAQSection'
 import Footer from '@/components/Footer'
 import StickyCTA from '@/components/StickyCTA'
 import ExitIntentPopup from '@/components/ExitIntentPopup'
-import ProgressIndicator from '@/components/ProgressIndicator'
+// import ProgressIndicator from '@/components/ProgressIndicator'
 
 export default function Home() {
   return (
@@ -33,7 +33,7 @@ export default function Home() {
       {/* UX Enhancement Components */}
       <StickyCTA />
       <ExitIntentPopup />
-      <ProgressIndicator />
+      {/* <ProgressIndicator /> */}
     </main>
   )
 }
