@@ -1,22 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import { kv } from '@vercel/kv'
 import { z } from 'zod'
 
 // Initialize Resend with API key from environment
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
-
-// Initialize KV with fallback for local development
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let kv: any = null
-try {
-  if (process.env.KV_URL) {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { kv: vercelKv } = require('@vercel/kv')
-    kv = vercelKv
-  }
-} catch {
-  console.log('KV not available in development mode')
-}
 
 // Validation schema
 const contactSchema = z.object({
@@ -44,25 +32,22 @@ export async function POST(request: NextRequest) {
     // Generate unique ID for this lead
     const leadId = `lead_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
     
-    // Store in Vercel KV for lead tracking (if available)
-    if (kv) {
-      try {
-        await kv.hset(leadId, {
-          ...validatedData,
-          status: 'new',
-          createdAt: new Date().toISOString(),
-          ip: request.ip || 'unknown',
-          userAgent: request.headers.get('user-agent') || 'unknown'
-        })
-        
-        // Add to leads list for easy retrieval
-        await kv.lpush('leads', leadId)
-      } catch (kvError) {
-        console.error('KV storage error:', kvError)
-        // Continue without KV storage - email will still work
-      }
-    } else {
-      console.log('KV not available - lead stored in logs only')
+    // Store in Vercel KV for lead tracking
+    try {
+      await kv.hset(leadId, {
+        ...validatedData,
+        status: 'new',
+        createdAt: new Date().toISOString(),
+        ip: request.ip || 'unknown',
+        userAgent: request.headers.get('user-agent') || 'unknown'
+      })
+      
+      // Add to leads list for easy retrieval
+      await kv.lpush('leads', leadId)
+      console.log(`Lead ${leadId} stored successfully`)
+    } catch (kvError) {
+      console.error('KV storage error:', kvError)
+      // Continue without KV storage - email will still work
     }
     
     // Determine email template based on variant

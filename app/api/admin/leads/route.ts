@@ -1,28 +1,8 @@
 import { NextResponse } from 'next/server'
-
-// Initialize KV with fallback for local development
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let kv: any = null
-try {
-  if (process.env.KV_URL) {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { kv: vercelKv } = require('@vercel/kv')
-    kv = vercelKv
-  }
-} catch {
-  console.log('KV not available in development mode')
-}
+import { kv } from '@vercel/kv'
 
 export async function GET() {
   try {
-    if (!kv) {
-      return NextResponse.json({
-        success: false,
-        message: 'Database not available',
-        leads: []
-      })
-    }
-
     // Get all lead IDs from the leads list
     const leadIds = await kv.lrange('leads', 0, -1)
     
@@ -51,7 +31,12 @@ export async function GET() {
     }
 
     // Sort leads by creation date (newest first)
-    leads.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    leads.sort((a: any, b: any) => {
+      const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0
+      const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0
+      return dateB - dateA
+    })
 
     return NextResponse.json({
       success: true,
