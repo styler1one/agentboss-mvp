@@ -4,8 +4,9 @@ import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
 import { Star, Download, Play, Shield, Zap, Users, CheckCircle, Eye } from "lucide-react"
+import ContactModal from "@/components/ContactModal"
+import { Progress } from "@/components/ui/progress"
 
 const agents = [
   {
@@ -145,7 +146,8 @@ const agents = [
 const categories = ["Alle", "Sales & Marketing", "Customer Service", "Human Resources", "Finance & Compliance", "Operations", "Marketing"]
 
 export default function AgentMarketplace() {
-  const [selectedCategory, setSelectedCategory] = useState("Alle")
+  const [selectedCategory, setSelectedCategory] = useState("All")
+  const [showCustomModal, setShowCustomModal] = useState(false)
   const [selectedAgent, setSelectedAgent] = useState<number | null>(null)
 
   const filteredAgents = agents.filter(agent => 
@@ -189,7 +191,7 @@ export default function AgentMarketplace() {
         </div>
 
         {/* Agent Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div id="agents-grid" className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {filteredAgents.map((agent) => (
             <Card 
               key={agent.id} 
@@ -444,11 +446,22 @@ export default function AgentMarketplace() {
                 Zie je niet wat je zoekt? Onze experts bouwen binnen 30 dagen een custom agent voor jouw specifieke use case.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="secondary" size="lg">
+                <Button 
+                  variant="secondary" 
+                  size="lg"
+                  onClick={() => setShowCustomModal(true)}
+                >
                   <Users className="w-5 h-5 mr-2" />
                   Custom Agent Aanvragen
                 </Button>
-                <Button variant="outline-white" size="lg">
+                <Button 
+                  variant="outline-white" 
+                  size="lg"
+                  onClick={() => {
+                    // Scroll to agents grid
+                    document.getElementById('agents-grid')?.scrollIntoView({ behavior: 'smooth' })
+                  }}
+                >
                   Bekijk Alle 50+ Agents
                 </Button>
               </div>
@@ -456,6 +469,14 @@ export default function AgentMarketplace() {
           </Card>
         </div>
       </div>
+
+      {/* Custom Agent Modal */}
+      <ContactModal
+        isOpen={showCustomModal}
+        onClose={() => setShowCustomModal(false)}
+        type="consultation"
+        title="Custom Agent Aanvragen"
+      />
     </section>
   )
 }

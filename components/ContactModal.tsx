@@ -291,7 +291,24 @@ export default function ContactModal({ isOpen, onClose, type, title }: ContactMo
         <Button variant="agent" size="lg" className="flex-1" onClick={onClose}>
           Sluiten
         </Button>
-        <Button variant="outline" size="lg" className="flex-1">
+        <Button 
+          variant="outline" 
+          size="lg" 
+          className="flex-1"
+          onClick={() => {
+            // Generate calendar event
+            const startDate = new Date()
+            startDate.setDate(startDate.getDate() + 1) // Tomorrow
+            startDate.setHours(14, 0, 0, 0) // 2 PM
+            
+            const endDate = new Date(startDate)
+            endDate.setMinutes(endDate.getMinutes() + 30) // 30 min meeting
+            
+            const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=AgentBoss%20Consultatie&dates=${startDate.toISOString().replace(/[-:]/g, '').split('.')[0]}Z/${endDate.toISOString().replace(/[-:]/g, '').split('.')[0]}Z&details=Consultatie%20met%20AgentBoss%20AI%20expert&location=Online%20(Teams)`
+            
+            window.open(calendarUrl, '_blank')
+          }}
+        >
           Voeg toe aan agenda
         </Button>
       </div>

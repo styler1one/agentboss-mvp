@@ -5,10 +5,13 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Shield, Clock, TrendingUp, Users, CheckCircle, Star } from "lucide-react"
 import { useState, useEffect } from "react"
+import ContactModal from "@/components/ContactModal"
 
 export default function HeroSection() {
   const [agentsDelivered, setAgentsDelivered] = useState(1247)
   const [companiesServed, setCompaniesServed] = useState(156)
+  const [showDemoModal, setShowDemoModal] = useState(false)
+  const [showStartModal, setShowStartModal] = useState(false)
 
   // Simulate real-time counter
   useEffect(() => {
@@ -84,11 +87,21 @@ export default function HeroSection() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="xl" variant="agent" className="text-lg">
+              <Button 
+                size="xl" 
+                variant="agent" 
+                className="text-lg"
+                onClick={() => setShowStartModal(true)}
+              >
                 Start je AI Agent
                 <CheckCircle className="w-5 h-5 ml-2" />
               </Button>
-              <Button size="xl" variant="outline-white" className="text-lg">
+              <Button 
+                size="xl" 
+                variant="outline-white" 
+                className="text-lg"
+                onClick={() => setShowDemoModal(true)}
+              >
                 Bekijk Demo
               </Button>
             </div>
@@ -166,6 +179,21 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
+
+      {/* Modals */}
+      <ContactModal
+        isOpen={showDemoModal}
+        onClose={() => setShowDemoModal(false)}
+        type="demo"
+        title="Live Platform Demo"
+      />
+
+      <ContactModal
+        isOpen={showStartModal}
+        onClose={() => setShowStartModal(false)}
+        type="consultation"
+        title="Start je AI Agent"
+      />
 
       {/* Floating Elements */}
       <div className="absolute top-20 right-20 w-20 h-20 bg-agent-green/20 rounded-full animate-float"></div>

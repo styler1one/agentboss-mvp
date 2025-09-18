@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ChevronDown, ChevronUp, HelpCircle, MessageCircle } from "lucide-react"
+import ContactModal from "@/components/ContactModal"
 
 const faqs = [
   {
@@ -68,8 +69,9 @@ const faqs = [
 const categories = ["Alle", "Algemeen", "ROI & Pricing", "Technisch", "Security", "Support"]
 
 export default function FAQSection() {
-  const [selectedCategory, setSelectedCategory] = useState("Alle")
   const [openFAQ, setOpenFAQ] = useState<number | null>(null)
+  const [selectedCategory, setSelectedCategory] = useState("Alle")
+  const [showChatModal, setShowChatModal] = useState(false)
 
   const filteredFAQs = faqs.filter(faq => 
     selectedCategory === "Alle" || faq.category === selectedCategory
@@ -203,10 +205,21 @@ export default function FAQSection() {
                 Gemiddelde response tijd: 2 minuten.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="secondary" size="lg">
+                <Button 
+                  variant="secondary" 
+                  size="lg"
+                  onClick={() => setShowChatModal(true)}
+                >
                   💬 Chat met Expert
                 </Button>
-                <Button variant="outline-white" size="lg">
+                <Button 
+                  variant="outline-white" 
+                  size="lg"
+                  onClick={() => {
+                    // Simulate phone call
+                    window.open('tel:+31201234567', '_self')
+                  }}
+                >
                   📞 Bel ons: +31 20 123 4567
                 </Button>
               </div>
@@ -217,6 +230,14 @@ export default function FAQSection() {
           </Card>
         </div>
       </div>
+
+      {/* Chat Modal */}
+      <ContactModal
+        isOpen={showChatModal}
+        onClose={() => setShowChatModal(false)}
+        type="expert"
+        title="Chat met Expert"
+      />
     </section>
   )
 }

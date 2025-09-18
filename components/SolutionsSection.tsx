@@ -1,9 +1,11 @@
 'use client'
 
+import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { CheckCircle, Zap, Users, Shield, Cog, ArrowRight, Star } from "lucide-react"
+import { CheckCircle, ArrowRight, Zap, Shield, Users, Cog, Star } from "lucide-react"
+import ContactModal from "@/components/ContactModal"
 
 const solutions = [
   {
@@ -119,6 +121,7 @@ const pricingTiers = [
 ]
 
 export default function SolutionsSection() {
+  const [showConsultationModal, setShowConsultationModal] = useState(false)
   return (
     <section id="solutions" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
       <div className="container mx-auto px-4">
@@ -302,11 +305,26 @@ export default function SolutionsSection() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="secondary" size="lg" className="text-agent-navy">
+                <Button 
+                  variant="secondary" 
+                  size="lg" 
+                  className="text-agent-navy"
+                  onClick={() => setShowConsultationModal(true)}
+                >
                   <Zap className="w-5 h-5 mr-2" />
                   Start Gratis Consultatie
                 </Button>
-                <Button variant="outline-white" size="lg">
+                <Button 
+                  variant="outline-white" 
+                  size="lg"
+                  onClick={() => {
+                    // Simulate business case download
+                    const link = document.createElement('a')
+                    link.href = '#'
+                    link.download = 'AgentBoss-Business-Case.pdf'
+                    link.click()
+                  }}
+                >
                   Download Business Case
                 </Button>
               </div>
@@ -314,6 +332,14 @@ export default function SolutionsSection() {
           </Card>
         </div>
       </div>
+
+      {/* Consultation Modal */}
+      <ContactModal
+        isOpen={showConsultationModal}
+        onClose={() => setShowConsultationModal(false)}
+        type="consultation"
+        title="Start Gratis Consultatie"
+      />
     </section>
   )
 }

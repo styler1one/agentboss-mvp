@@ -1,14 +1,16 @@
 'use client'
 
 import { useState, useEffect } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { X, Zap, Clock, Gift, TrendingUp } from "lucide-react"
+import ContactModal from "@/components/ContactModal"
 
 export default function ExitIntentPopup() {
   const [isVisible, setIsVisible] = useState(false)
   const [hasShown, setHasShown] = useState(false)
+  const [showAssessmentModal, setShowAssessmentModal] = useState(false)
 
   useEffect(() => {
     const handleMouseLeave = (e: MouseEvent) => {
@@ -117,6 +119,10 @@ export default function ExitIntentPopup() {
             <Button 
               size="lg" 
               className="w-full bg-gradient-to-r from-agent-green to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold"
+              onClick={() => {
+                setIsVisible(false)
+                setShowAssessmentModal(true)
+              }}
             >
               🎁 Claim Gratis Assessment (€2,500 waarde)
             </Button>
@@ -136,6 +142,14 @@ export default function ExitIntentPopup() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Assessment Modal */}
+      <ContactModal
+        isOpen={showAssessmentModal}
+        onClose={() => setShowAssessmentModal(false)}
+        type="assessment"
+        title="Gratis AI Assessment"
+      />
     </div>
   )
 }

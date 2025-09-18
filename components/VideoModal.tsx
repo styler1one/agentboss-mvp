@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { X, Play, Volume2, VolumeX, Download } from "lucide-react"
+import ContactModal from "@/components/ContactModal"
 
 interface VideoModalProps {
   isOpen: boolean
@@ -29,6 +30,7 @@ interface VideoModalProps {
 export default function VideoModal({ isOpen, onClose, video }: VideoModalProps) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isMuted, setIsMuted] = useState(false)
+  const [showBookingModal, setShowBookingModal] = useState(false)
 
   if (!isOpen) return null
 
@@ -147,10 +149,26 @@ export default function VideoModal({ isOpen, onClose, video }: VideoModalProps) 
 
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="agent" size="lg" className="flex-1">
+              <Button 
+                variant="agent" 
+                size="lg" 
+                className="flex-1"
+                onClick={() => setShowBookingModal(true)}
+              >
                 📞 Book Vergelijkbare Resultaten
               </Button>
-              <Button variant="outline" size="lg" className="flex-1">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="flex-1"
+                onClick={() => {
+                  // Simulate PDF download
+                  const link = document.createElement('a')
+                  link.href = '#'
+                  link.download = `${video.company}-case-study.pdf`
+                  link.click()
+                }}
+              >
                 <Download className="w-4 h-4 mr-2" />
                 Download Case Study PDF
               </Button>
@@ -170,6 +188,14 @@ export default function VideoModal({ isOpen, onClose, video }: VideoModalProps) 
           </div>
         </CardContent>
       </Card>
+
+      {/* Booking Modal */}
+      <ContactModal
+        isOpen={showBookingModal}
+        onClose={() => setShowBookingModal(false)}
+        type="consultation"
+        title="Book Vergelijkbare Resultaten"
+      />
     </div>
   )
 }

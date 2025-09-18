@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Star, MapPin, Clock, Award, Users, Search } from "lucide-react"
+import ContactModal from "@/components/ContactModal"
 
 const experts = [
   {
@@ -119,6 +120,8 @@ const experts = [
 ]
 
 export default function ExpertNetwork() {
+  // const [selectedSpecialization, setSelectedSpecialization] = useState("All")
+  const [showExpertModal, setShowExpertModal] = useState(false)
   const [selectedExpert, setSelectedExpert] = useState<number | null>(null)
   const [filter, setFilter] = useState("all")
 
@@ -174,7 +177,7 @@ export default function ExpertNetwork() {
         </div>
 
         {/* Expert Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div id="experts-grid" className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {filteredExperts.map((expert) => (
             <Card 
               key={expert.id} 
@@ -371,11 +374,22 @@ export default function ExpertNetwork() {
                 Vertel ons over je project en we matchen je binnen 24 uur met de perfecte expert
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="secondary" size="lg">
+                <Button 
+                  variant="secondary" 
+                  size="lg"
+                  onClick={() => setShowExpertModal(true)}
+                >
                   <Search className="w-5 h-5 mr-2" />
                   Start Expert Matching
                 </Button>
-                <Button variant="outline-white" size="lg">
+                <Button 
+                  variant="outline-white" 
+                  size="lg"
+                  onClick={() => {
+                    // Scroll to experts grid
+                    document.getElementById('experts-grid')?.scrollIntoView({ behavior: 'smooth' })
+                  }}
+                >
                   Bekijk Alle 250+ Experts
                 </Button>
               </div>
@@ -383,6 +397,14 @@ export default function ExpertNetwork() {
           </Card>
         </div>
       </div>
+
+      {/* Expert Matching Modal */}
+      <ContactModal
+        isOpen={showExpertModal}
+        onClose={() => setShowExpertModal(false)}
+        type="expert"
+        title="Expert Matching"
+      />
     </section>
   )
 }
