@@ -23,7 +23,7 @@ export async function GET() {
     
     try {
       leadIds = await kv.lrange('leads', 0, -1)
-    } catch (kvError) {
+    } catch {
       console.log('KV SDK failed, trying direct Redis API for leads list')
       
       // Fallback to direct Redis REST API
@@ -55,7 +55,7 @@ export async function GET() {
         let leadData = null
         try {
           leadData = await kv.hgetall(leadId)
-        } catch (kvError) {
+        } catch {
           // Fallback to direct Redis API for individual leads
           const response = await fetch(`${process.env.KV_REST_API_URL}/get/${leadId}`, {
             headers: {
