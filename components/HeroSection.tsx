@@ -50,14 +50,41 @@ export default function HeroSection() {
             {/* Main Headline */}
             <div className="space-y-4">
               <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
-                Van AI-chaos naar{" "}
-                <span className="gradient-text">AI-succes</span>{" "}
-                in 30 dagen
+                Stop met{" "}
+                <span className="text-red-400">gefaalde AI projecten</span>{" "}
+                <br />Start met{" "}
+                <span className="gradient-text">gegarandeerd succes</span>
               </h1>
               <p className="text-xl text-blue-100 leading-relaxed">
-                Europa's eerste <strong>gegarandeerde AI-agent delivery platform</strong>. 
-                Werkende agent binnen 30 werkdagen of 100% geld terug.
+                <strong>78% van AI projecten faalt.</strong> Wij garanderen succes met werkende AI-agents 
+                binnen 30 dagen of <strong>100% geld terug</strong>. Geen technische kennis vereist.
               </p>
+            </div>
+
+            {/* Pain Points */}
+            <div className="bg-white/10 rounded-lg p-6 backdrop-blur-sm">
+              <h3 className="text-lg font-semibold mb-4 text-yellow-300">❌ Herken je dit?</h3>
+              <div className="grid md:grid-cols-2 gap-3 text-sm">
+                <div className="flex items-center space-x-2">
+                  <span className="text-red-400">•</span>
+                  <span>AI projecten die maanden duren en niets opleveren</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-red-400">•</span>
+                  <span>Dure consultants zonder concrete resultaten</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-red-400">•</span>
+                  <span>Technische complexiteit die niemand begrijpt</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-red-400">•</span>
+                  <span>Budgetoverschrijdingen en gemiste deadlines</span>
+                </div>
+              </div>
+              <div className="mt-4 text-agent-green font-semibold">
+                ✅ Wij lossen dit op met onze Triple Guarantee
+              </div>
             </div>
 
             {/* Triple Guarantee */}

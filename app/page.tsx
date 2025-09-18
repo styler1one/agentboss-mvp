@@ -5,7 +5,9 @@ import Header from '@/components/Header'
 import HeroSection from '@/components/HeroSection'
 import StatsSection from '@/components/StatsSection'
 import SolutionsSection from '@/components/SolutionsSection'
+import InteractiveAssessment from '@/components/InteractiveAssessment'
 import ROICalculator from '@/components/ROICalculator'
+import IndustryShowcase from '@/components/IndustryShowcase'
 import TestimonialsSection from '@/components/TestimonialsSection'
 import ExpertNetwork from '@/components/ExpertNetwork'
 import AgentMarketplace from '@/components/AgentMarketplace'
@@ -15,6 +17,7 @@ import FAQSection from '@/components/FAQSection'
 import Footer from '@/components/Footer'
 import StickyCTA from '@/components/StickyCTA'
 import ExitIntentPopup from '@/components/ExitIntentPopup'
+import LiveChatWidget from '@/components/LiveChatWidget'
 // import ProgressIndicator from '@/components/ProgressIndicator'
 
 export default function Home() {
@@ -35,7 +38,9 @@ export default function Home() {
       <Header />
       <HeroSection />
       <StatsSection />
+      <InteractiveAssessment />
       <SolutionsSection />
+      <IndustryShowcase />
       <ROICalculator />
       <TestimonialsSection />
       <ExpertNetwork />
@@ -48,6 +53,7 @@ export default function Home() {
       {/* UX Enhancement Components */}
       <StickyCTA />
       <ExitIntentPopup />
+      <LiveChatWidget />
       {/* <ProgressIndicator /> */}
     </main>
   )
