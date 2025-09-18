@@ -36,6 +36,9 @@ export default function Header() {
               <Link href="#cases" className="text-gray-600 hover:text-agent-navy transition-colors">
                 Cases
               </Link>
+              <Link href="#faq" className="text-gray-600 hover:text-agent-navy transition-colors">
+                FAQ
+              </Link>
             </div>
           </nav>
 

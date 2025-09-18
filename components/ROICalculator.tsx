@@ -122,14 +122,17 @@ export default function ROICalculator() {
               </div>
 
               <Button 
+                size="lg" 
+                variant="agent" 
+                className="w-full"
                 onClick={handleCalculate}
-                className="w-full" 
-                size="lg"
-                variant="agent"
               >
+                <TrendingUp className="w-5 h-5 mr-2" />
                 Bereken mijn ROI
-                <TrendingUp className="w-5 h-5 ml-2" />
               </Button>
+              <div className="text-center text-xs text-gray-500 mt-2">
+                💡 Tip: Download ons ROI Whitepaper na de berekening
+              </div>
             </CardContent>
           </Card>
 
@@ -210,6 +213,32 @@ export default function ROICalculator() {
                   </CardContent>
                 </Card>
 
+                {/* Lead Magnet */}
+                <Card className="shadow-xl border-0 bg-gradient-to-r from-green-500 to-emerald-600 text-white">
+                  <CardContent className="p-8 text-center space-y-4">
+                    <div className="text-4xl mb-2">📊</div>
+                    <h3 className="text-xl font-bold">Download je Persoonlijke ROI Report</h3>
+                    <p className="text-green-100">
+                      Ontvang een gedetailleerd 12-pagina rapport met jouw ROI berekening, 
+                      implementatie roadmap en industry benchmarks.
+                    </p>
+                    <div className="bg-white/20 rounded-lg p-4 text-sm">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>✅ Jouw ROI: <strong>{Math.round(roi)}%</strong></div>
+                        <div>✅ Payback: <strong>{paybackMonths} maanden</strong></div>
+                        <div>✅ Besparing: <strong>€{Math.round(annualSavings).toLocaleString()}/jaar</strong></div>
+                        <div>✅ Implementation plan</div>
+                      </div>
+                    </div>
+                    <Button variant="secondary" size="lg" className="bg-white text-green-600 hover:bg-gray-100">
+                      📥 Download Gratis ROI Report
+                    </Button>
+                    <div className="text-xs text-green-200">
+                      Geen spam, direct download. 2,847+ downloads deze maand.
+                    </div>
+                  </CardContent>
+                </Card>
+
                 {/* CTA */}
                 <Card className="shadow-xl border-0 bg-gradient-to-r from-agent-navy to-agent-blue text-white">
                   <CardContent className="p-8 text-center space-y-4">
@@ -223,7 +252,7 @@ export default function ROICalculator() {
                         Book Gratis Consultatie
                       </Button>
                       <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-agent-navy">
-                        Download Business Case
+                        Bekijk Success Stories
                       </Button>
                     </div>
                   </CardContent>
