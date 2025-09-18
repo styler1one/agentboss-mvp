@@ -44,6 +44,12 @@ export default function Header() {
               >
                 Solutions
               </button>
+              <Link 
+                href="/industries"
+                className="text-gray-600 hover:text-agent-navy transition-colors"
+              >
+                Industries
+              </Link>
               <button 
                 onClick={() => handleNavigation('experts')}
                 className="text-gray-600 hover:text-agent-navy transition-colors"
