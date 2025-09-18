@@ -6,13 +6,15 @@ import { z } from 'zod'
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 
 // Initialize KV with fallback for local development
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let kv: any = null
 try {
   if (process.env.KV_URL) {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { kv: vercelKv } = require('@vercel/kv')
     kv = vercelKv
   }
-} catch (error) {
+} catch {
   console.log('KV not available in development mode')
 }
 
