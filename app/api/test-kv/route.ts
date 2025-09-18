@@ -33,7 +33,11 @@ export async function GET() {
       environment: {
         hasKvUrl: !!process.env.KV_URL,
         hasKvToken: !!process.env.KV_REST_API_TOKEN,
-        nodeEnv: process.env.NODE_ENV
+        hasRedisUrl: !!process.env.REDIS_URL,
+        nodeEnv: process.env.NODE_ENV,
+        availableVars: Object.keys(process.env).filter(key => 
+          key.includes('KV') || key.includes('REDIS')
+        )
       }
     })
     
@@ -46,7 +50,11 @@ export async function GET() {
       environment: {
         hasKvUrl: !!process.env.KV_URL,
         hasKvToken: !!process.env.KV_REST_API_TOKEN,
-        nodeEnv: process.env.NODE_ENV
+        hasRedisUrl: !!process.env.REDIS_URL,
+        nodeEnv: process.env.NODE_ENV,
+        availableVars: Object.keys(process.env).filter(key => 
+          key.includes('KV') || key.includes('REDIS')
+        )
       }
     }, { status: 500 })
   }

@@ -35,8 +35,8 @@ export async function POST(request: NextRequest) {
     // Store in Vercel KV for lead tracking
     let kvStorageSuccess = false
     try {
-      // Check if KV environment variables are available
-      if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+      // Check if any KV environment variables are available
+      if (process.env.KV_REST_API_URL || process.env.REDIS_URL) {
         await kv.hset(leadId, {
           ...validatedData,
           status: 'new',
