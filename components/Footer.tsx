@@ -43,7 +43,7 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="font-semibold text-lg">Solutions</h4>
             <ul className="space-y-2 text-sm text-blue-200">
-              <li><Link href="#solutions" className="hover:text-white transition-colors">Agent Factory</Link></li>
+              <li><Link href="/agent-factory" className="hover:text-white transition-colors">Agent Factory</Link></li>
               <li><Link href="#experts" className="hover:text-white transition-colors">Expert Network</Link></li>
               <li><Link href="#marketplace" className="hover:text-white transition-colors">Agent Marketplace</Link></li>
               <li><Link href="#solutions" className="hover:text-white transition-colors">Custom Development</Link></li>

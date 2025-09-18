@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react"
+import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -199,14 +200,16 @@ export default function SolutionsSection() {
                       <div className="text-2xl font-bold text-agent-navy mb-2">
                         {solution.pricing}
                       </div>
-                      <Button 
-                        variant={solution.popular ? "agent" : "outline"} 
-                        size="sm" 
-                        className="w-full"
-                      >
-                        Meer Info
-                        <ArrowRight className="w-4 h-4 ml-2" />
-                      </Button>
+                      <Link href="/agent-factory">
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="w-full"
+                        >
+                          Meer Info
+                          <ArrowRight className="w-4 h-4 ml-2" />
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </CardContent>
