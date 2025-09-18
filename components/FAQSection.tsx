@@ -80,7 +80,7 @@ export default function FAQSection() {
   const popularFAQs = faqs.filter(faq => faq.popular)
 
   return (
-    <section id="faq" className="py-20 bg-white">
+    <section className="section-spacing-compact bg-white">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center space-y-4 mb-16">

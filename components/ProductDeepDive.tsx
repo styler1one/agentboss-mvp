@@ -113,7 +113,7 @@ export default function ProductDeepDive() {
   const [showAgentModal, setShowAgentModal] = useState(false)
 
   return (
-    <section className="py-20 bg-white">
+    <section className="section-spacing-compact bg-white">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">

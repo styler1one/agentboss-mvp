@@ -28,7 +28,7 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-agent-navy via-blue-900 to-agent-blue">
+    <section className="relative min-h-[85vh] bg-gradient-to-br from-agent-navy via-blue-900 to-agent-blue overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:50px_50px]" />
       
