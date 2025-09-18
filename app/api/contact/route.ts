@@ -4,7 +4,7 @@ import { kv } from '@vercel/kv'
 import { z } from 'zod'
 
 // Initialize Resend with API key from environment
-const resend = new Resend(process.env.RESEND_API_KEY)
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 
 // Validation schema
 const contactSchema = z.object({
@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
     await kv.lpush('leads', leadId)
     
     // Determine email template based on variant
-    const getEmailTemplate = (variant: string, data: any) => {
+    const getEmailTemplate = (variant: string, data: typeof validatedData) => {
       const baseTemplate = {
         from: 'AgentBoss.nl <noreply@agentboss.nl>',
         to: ['info@agentboss.nl'],
@@ -137,8 +137,10 @@ export async function POST(request: NextRequest) {
     }
     
     // Send email notification
-    const emailTemplate = getEmailTemplate(validatedData.variant, validatedData)
-    await resend.emails.send(emailTemplate)
+    if (resend) {
+      const emailTemplate = getEmailTemplate(validatedData.variant, validatedData)
+      await resend.emails.send(emailTemplate)
+    }
     
     // Send confirmation email to user
     const confirmationEmail = {
@@ -175,7 +177,9 @@ export async function POST(request: NextRequest) {
       `
     }
     
-    await resend.emails.send(confirmationEmail)
+    if (resend) {
+      await resend.emails.send(confirmationEmail)
+    }
     
     // Return success response
     return NextResponse.json({

@@ -85,12 +85,16 @@ export default function ContactForm({
       setIsSubmitted(true)
       
       // Track conversion
-      if (typeof window !== 'undefined' && (window as any).gtag) {
-        (window as any).gtag('event', 'conversion', {
-          send_to: 'AW-CONVERSION_ID/CONVERSION_LABEL',
-          value: 1.0,
-          currency: 'EUR'
-        })
+      if (typeof window !== 'undefined') {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const gtag = (window as any).gtag;
+        if (gtag) {
+          gtag('event', 'conversion', {
+            send_to: 'AW-CONVERSION_ID/CONVERSION_LABEL',
+            value: 1.0,
+            currency: 'EUR'
+          })
+        }
       }
 
     } catch (err) {
@@ -203,7 +207,7 @@ export default function ContactForm({
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Industrie
               </label>
-              <Select value={formData.industry} onValueChange={(value) => handleInputChange('industry', value)}>
+              <Select value={formData.industry} onValueChange={(value: string) => handleInputChange('industry', value)}>
                 <SelectTrigger>
                   <SelectValue placeholder="Selecteer je industrie" />
                 </SelectTrigger>
@@ -223,7 +227,7 @@ export default function ContactForm({
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Interesse in
               </label>
-              <Select value={formData.solution} onValueChange={(value) => handleInputChange('solution', value)}>
+              <Select value={formData.solution} onValueChange={(value: string) => handleInputChange('solution', value)}>
                 <SelectTrigger>
                   <SelectValue placeholder="Selecteer oplossing" />
                 </SelectTrigger>
@@ -243,7 +247,7 @@ export default function ContactForm({
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Budget indicatie
               </label>
-              <Select value={formData.budget} onValueChange={(value) => handleInputChange('budget', value)}>
+              <Select value={formData.budget} onValueChange={(value: string) => handleInputChange('budget', value)}>
                 <SelectTrigger>
                   <SelectValue placeholder="Selecteer budget range" />
                 </SelectTrigger>

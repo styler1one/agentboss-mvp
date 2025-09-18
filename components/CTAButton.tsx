@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import ContactForm from "@/components/ContactForm"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
-import { Calendar, Phone, Send, Zap, Users, Building } from "lucide-react"
+import { Calendar, Phone, Send, Zap, Users } from "lucide-react"
 
 interface CTAButtonProps {
   variant?: 'assessment' | 'consultation' | 'demo' | 'contact' | 'phone'
