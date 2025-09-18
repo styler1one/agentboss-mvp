@@ -50,29 +50,9 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // AgentBoss Brand Colors - Optimized
-        'agent': {
-          'blue': '#1E40AF',
-          'green': '#10B981', 
-          'navy': '#1E3A8A',
-          'accent': '#F59E0B',
-        },
-        // Extended Brand Palette
-        'brand': {
-          50: '#F8FAFC',
-          100: '#F1F5F9', 
-          200: '#E2E8F0',
-          300: '#CBD5E1',
-          400: '#94A3B8',
-          500: '#64748B',
-          600: '#475569',
-          700: '#334155',
-          800: '#1E293B',
-          900: '#0F172A',
-        },
-        // Legacy support
-        "agent-navy": "#1E3A8A",
-        "agent-blue": "#1E40AF", 
+        // AgentBoss Original Colors (restored)
+        "agent-navy": "#0A1628",
+        "agent-blue": "#00D4FF", 
         "agent-green": "#10B981",
       },
       borderRadius: {
@@ -111,15 +91,15 @@ module.exports = {
           "50%": { transform: "translateY(-4px)" },
         },
         "pulse-glow": {
-          "0%, 100%": { boxShadow: "0 0 0 0 rgba(30, 64, 175, 0.4)" },
-          "50%": { boxShadow: "0 0 0 8px rgba(30, 64, 175, 0)" },
+          "0%, 100%": { boxShadow: "0 0 0 0 rgba(0, 212, 255, 0.4)" },
+          "50%": { boxShadow: "0 0 0 8px rgba(0, 212, 255, 0)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         // AgentBoss Animations
-        "fade-up": "fade-up 0.6s ease-out",
+        "fade-up": "fade-up 0.6s ease-out both",
         "fade-up-delay-1": "fade-up 0.6s ease-out 0.1s both",
         "fade-up-delay-2": "fade-up 0.6s ease-out 0.2s both",
         "fade-up-delay-3": "fade-up 0.6s ease-out 0.3s both",
