@@ -207,7 +207,7 @@ export default function InteractiveAssessment() {
       <section className="py-20 bg-gradient-to-br from-blue-50 to-green-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-8">
+            <div className="text-center space-y-4 mb-12 animate-fade-up">
               <Badge variant="success" className="mb-4">
                 <CheckCircle className="w-4 h-4 mr-2" />
                 Assessment Compleet
@@ -319,7 +319,7 @@ export default function InteractiveAssessment() {
   const question = assessmentQuestions[currentQuestion]
 
   return (
-    <section className="py-20 bg-gradient-to-br from-blue-50 to-green-50">
+    <section className="section-spacing-compact bg-gradient-to-br from-blue-50 to-green-50">
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto">
           {/* Progress */}

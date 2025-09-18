@@ -31,7 +31,7 @@ export default function StatsSection() {
   return (
     <section className="section-spacing-compact bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center space-y-4 mb-12">
+        <div className="text-center space-y-4 mb-12 animate-fade-up">
           <Badge variant="outline" className="mb-4">
             <TrendingUp className="w-4 h-4 mr-2" />
             Live Platform Statistics
@@ -46,11 +46,11 @@ export default function StatsSection() {
         </div>
 
         {/* Main Stats Grid */}
-        <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-6 mb-12">
-          <Card className="text-center hover:shadow-lg transition-shadow">
+        <div className="grid grid-cols-2 lg:grid-cols-6 gap-6 mb-12 animate-fade-up-delay-1">
+          <Card className="text-center hover:shadow-xl hover:scale-105 transition-all duration-300 hover:border-agent-blue/50">
             <CardContent className="p-6">
               <div className="space-y-2">
-                <div className="text-3xl font-bold text-agent-blue">
+                <div className="text-3xl font-bold text-agent-blue animate-pulse-glow">
                   {stats.agentsDelivered.toLocaleString()}
                 </div>
                 <div className="text-sm text-gray-600">Agents Delivered</div>

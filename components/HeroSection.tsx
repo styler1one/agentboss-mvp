@@ -35,7 +35,7 @@ export default function HeroSection() {
       <div className="container mx-auto px-4 py-20 relative">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Hero Content */}
-          <div className="text-white space-y-8">
+          <div className="text-white space-y-8 animate-fade-up">
             {/* Trust Badge */}
             <div className="flex items-center space-x-2">
               <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
@@ -48,7 +48,7 @@ export default function HeroSection() {
             </div>
 
             {/* Main Headline */}
-            <div className="space-y-4">
+            <div className="space-y-4 animate-fade-up-delay-1">
               <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
                 Van AI-chaos naar{" "}
                 <span className="gradient-text">AI-succes</span>{" "}
@@ -111,12 +111,12 @@ export default function HeroSection() {
               </div>
             </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row gap-4 animate-fade-up-delay-3">
               <Button 
                 size="xl" 
                 variant="agent" 
-                className="text-lg"
+                className="text-lg hover:scale-105 transition-transform duration-200 hover:shadow-xl"
                 onClick={() => setShowStartModal(true)}
               >
                 Start je AI Agent
@@ -125,7 +125,7 @@ export default function HeroSection() {
               <Button 
                 size="xl" 
                 variant="outline-white" 
-                className="text-lg"
+                className="text-lg hover:scale-105 transition-all duration-200 hover:bg-white/10"
                 onClick={() => setShowDemoModal(true)}
               >
                 Bekijk Demo
