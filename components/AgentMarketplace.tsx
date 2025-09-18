@@ -49,7 +49,7 @@ const agents = [
     demoUrl: "#",
     validated: true,
     securityScore: 98,
-    compliance: ["GDPR", "ISO27001"],
+    compliance: ["GDPR", "Responsible AI"],
     successStories: 67,
     avgImplementation: "3 weken"
   },

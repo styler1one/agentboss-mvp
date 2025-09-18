@@ -40,7 +40,7 @@ const complianceFrameworks = [
     name: "GDPR",
     status: "Certified",
     coverage: 100,
-    description: "ISO27001 gecertificeerde data protection en privacy compliance",
+    description: "GDPR-compliant data protection met Responsible AI principes",
     requirements: [
       "Data minimization principles",
       "Consent management systems",
@@ -56,22 +56,22 @@ const complianceFrameworks = [
   },
   {
     id: 3,
-    name: "ISO27001",
+    name: "Responsible AI",
     status: "Certified",
     coverage: 100,
-    description: "Information Security Management System certificering",
+    description: "Ethische AI ontwikkeling en transparante algoritmes",
     requirements: [
-      "Security policy frameworks",
-      "Risk management procedures",
-      "Incident response protocols",
-      "Access control systems",
-      "Continuous monitoring"
+      "AI bias detection en mitigatie",
+      "Transparante besluitvorming",
+      "Menselijke controle en oversight",
+      "Eerlijke en inclusieve AI",
+      "Continue ethiek monitoring"
     ],
-    industries: ["Enterprise & Government"],
+    industries: ["Alle AI-implementaties"],
     deadline: "Ongoing compliance",
-    penalty: "Contract & reputation risk",
+    penalty: "Reputatie en vertrouwensrisico",
     color: "from-purple-500 to-purple-600",
-    icon: "🛡️"
+    icon: "🤖"
   },
   {
     id: 4,
@@ -274,7 +274,7 @@ export default function ComplianceCenterPage() {
             <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
               Blijf <strong className="text-agent-green">100% compliant</strong> met alle relevante regelgeving. 
               Onze <strong className="text-agent-green">geautomatiseerde compliance platform</strong> 
-              zorgt voor continue monitoring, rapportage en updates voor EU AI Act, GDPR, ISO27001 en meer.
+              zorgt voor continue monitoring, rapportage en updates voor EU AI Act, GDPR, Responsible AI en meer.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -337,7 +337,7 @@ export default function ComplianceCenterPage() {
               25+ Ondersteunde Regelgevingen
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Van EU AI Act tot GDPR, ISO27001 tot HIPAA - wij zorgen ervoor 
+              Van EU AI Act tot GDPR, Responsible AI tot HIPAA - wij zorgen ervoor 
               dat je AI-systemen compliant blijven met alle relevante wetgeving.
             </p>
           </div>

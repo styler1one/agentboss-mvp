@@ -31,7 +31,7 @@ export default function Footer() {
             <div className="flex space-x-4">
               <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
                 <Shield className="w-3 h-3 mr-1" />
-                ISO27001
+                Responsible AI
               </Badge>
               <Badge variant="success">
                 95% Succes

@@ -232,7 +232,7 @@ export default function SolutionsSection() {
             </h3>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Transparante pricing zonder verborgen kosten. Alle pakketten inclusief 
-              onze triple guarantee: 30 dagen delivery, 90 dagen ROI, ISO27001 security.
+              onze triple guarantee: 30 dagen delivery, 90 dagen ROI, Responsible AI.
             </p>
           </div>
 

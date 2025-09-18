@@ -36,7 +36,7 @@ export default function LegalModal({ isOpen, onClose, type }: LegalModalProps) {
             • Communicatie over projecten
             
             **3. Gegevensbeveiliging**
-            • ISO27001 gecertificeerde infrastructuur
+            • Responsible AI gecertificeerde infrastructuur
             • End-to-end encryptie
             • Regelmatige security audits
             
@@ -63,7 +63,7 @@ export default function LegalModal({ isOpen, onClose, type }: LegalModalProps) {
             AgentBoss levert AI-agent ontwikkeling en implementatie diensten volgens onze Triple Guarantee:
             • 30 dagen delivery garantie
             • 90 dagen ROI garantie  
-            • ISO27001 security garantie
+            • Responsible AI garantie
             
             **2. Prijzen en betaling**
             • Prijzen zoals vermeld in offerte

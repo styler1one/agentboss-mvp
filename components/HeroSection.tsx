@@ -79,8 +79,8 @@ export default function HeroSection() {
               <div className="flex items-center space-x-3 bg-white/10 rounded-lg p-4 backdrop-blur-sm">
                 <Shield className="w-8 h-8 text-yellow-400" />
                 <div>
-                  <div className="font-semibold">ISO27001</div>
-                  <div className="text-sm text-blue-200">Security Garantie</div>
+                  <div className="font-semibold">Responsible AI</div>
+                  <div className="text-sm text-blue-200">Ethische AI Garantie</div>
                 </div>
               </div>
             </div>

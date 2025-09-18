@@ -33,7 +33,7 @@ const faqs = [
     id: 4,
     category: "Security",
     question: "Hoe zit het met data privacy en security?",
-    answer: "We zijn ISO27001 gecertificeerd en GDPR compliant. Alle data wordt encrypted opgeslagen in Nederlandse datacenters. Jouw data blijft 100% eigendom van jouw bedrijf.",
+    answer: "We hanteren strikte Responsible AI principes en zijn GDPR compliant. Alle data wordt encrypted opgeslagen in Nederlandse datacenters. Jouw data blijft 100% eigendom van jouw bedrijf.",
     popular: true
   },
   {

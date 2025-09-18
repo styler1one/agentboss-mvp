@@ -75,7 +75,7 @@ export default function Header() {
           <div className="hidden lg:flex items-center space-x-4">
             <Badge variant="outline" className="text-xs">
               <Shield className="w-3 h-3 mr-1" />
-              ISO27001
+              Responsible AI
             </Badge>
             <Badge variant="outline" className="text-xs">
               <Zap className="w-3 h-3 mr-1" />

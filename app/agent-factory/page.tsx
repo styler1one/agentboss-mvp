@@ -180,7 +180,7 @@ export default function AgentFactoryPage() {
             <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
               Van concept tot productie in 8 weken. Onze experts bouwen jouw perfecte AI-agent 
               met <strong className="text-agent-green">Triple Guarantee</strong>: 
-              30 dagen delivery, 90 dagen ROI, ISO27001 security.
+              30 dagen delivery, 90 dagen ROI, Responsible AI.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
