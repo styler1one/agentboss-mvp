@@ -4,7 +4,6 @@
 
 ### 1. **Lokaal Draaien**
 ```bash
-cd agentboss-mvp
 npm install
 npm run dev
 ```

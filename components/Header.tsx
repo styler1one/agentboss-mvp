@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import CTAButton from "@/components/CTAButton"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
 import { Menu, X, Shield, Zap, TrendingUp } from "lucide-react"
@@ -95,12 +96,12 @@ export default function Header() {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-3">
-            <Button variant="ghost" size="sm">
-              Login
-            </Button>
-            <Button variant="agent" size="sm">
+            <CTAButton variant="phone" size="sm">
+              Bel Direct
+            </CTAButton>
+            <CTAButton variant="assessment" size="sm">
               Start je Agent
-            </Button>
+            </CTAButton>
           </div>
 
           {/* Mobile Menu Button */}
@@ -157,12 +158,12 @@ export default function Header() {
                 FAQ
               </button>
               <div className="flex flex-col space-y-2 pt-4">
-                <Button variant="ghost" size="sm">
-                  Login
-                </Button>
-                <Button variant="agent" size="sm">
+                <CTAButton variant="assessment" size="sm" className="w-full">
                   Start je Agent
-                </Button>
+                </CTAButton>
+                <CTAButton variant="phone" size="sm" className="w-full">
+                  Bel Direct
+                </CTAButton>
               </div>
             </nav>
           </div>
