@@ -200,7 +200,7 @@ export default function SolutionsSection() {
                       <div className="text-2xl font-bold text-agent-navy mb-2">
                         {solution.pricing}
                       </div>
-                      <Link href="/agent-factory">
+                      <Link href={solution.id === 1 ? "/agent-factory" : solution.id === 2 ? "/expert-ecosystem" : "#solutions"}>
                         <Button 
                           variant="outline" 
                           size="sm" 
