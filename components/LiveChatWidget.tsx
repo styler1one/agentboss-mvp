@@ -136,7 +136,7 @@ export default function LiveChatWidget() {
 
   if (!isOpen) {
     return (
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed bottom-6 right-6 z-40">
         <Button
           size="lg"
           className="rounded-full w-16 h-16 bg-gradient-to-r from-agent-blue to-agent-green hover:scale-110 transition-transform shadow-2xl"
@@ -160,7 +160,7 @@ export default function LiveChatWidget() {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 w-96 h-[500px] max-w-[calc(100vw-2rem)]">
+    <div className="fixed bottom-6 right-6 z-40 w-96 h-[500px] max-w-[calc(100vw-2rem)] max-h-[calc(100vh-2rem)]">
       <Card className="h-full shadow-2xl border-2 border-agent-blue">
         <CardHeader className="bg-gradient-to-r from-agent-blue to-agent-green text-white p-4">
           <div className="flex items-center justify-between">

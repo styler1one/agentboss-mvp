@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { 
   ArrowRight, Calculator, Users, ShoppingCart, 
-  MessageCircle, Star, X, Phone
+  MessageCircle, Star, X
 } from "lucide-react"
 import ContactModal from "@/components/ContactModal"
 
@@ -61,11 +61,11 @@ const sectionCTAs: Record<string, CTAConfig> = {
     badge: "Gegarandeerd"
   },
   default: {
-    text: "Start nu",
-    icon: Phone,
+    text: "Start je AI Agent",
+    icon: ArrowRight,
     variant: "agent",
     action: "contact",
-    badge: "Gratis gesprek"
+    badge: "Gratis consultatie"
   }
 }
 
@@ -150,7 +150,7 @@ export default function SmartStickyCTA() {
   }
 
   return (
-    <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-40 max-w-sm w-full mx-4">
+    <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-30 max-w-sm w-full mx-4">
       <div className="bg-white rounded-2xl shadow-2xl border-2 border-agent-blue p-4">
         <div className="flex items-center justify-between">
           <div className="flex-1">

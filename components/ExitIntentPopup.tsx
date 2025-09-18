@@ -39,7 +39,7 @@ export default function ExitIntentPopup() {
   if (!isVisible) return null
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black/50 z-[200] flex items-center justify-center p-4">
       <Card className="max-w-lg w-full shadow-2xl animate-in zoom-in-95 duration-300">
         <CardHeader className="relative bg-gradient-to-r from-red-500 to-orange-500 text-white">
           <Button

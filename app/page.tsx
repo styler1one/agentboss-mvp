@@ -15,7 +15,7 @@ import Footer from '@/components/Footer'
 import SmartStickyCTA from '@/components/SmartStickyCTA'
 import ExitIntentPopup from '@/components/ExitIntentPopup'
 import LiveChatWidget from '@/components/LiveChatWidget'
-import ProgressIndicator from '@/components/ProgressIndicator'
+// import ProgressIndicator from '@/components/ProgressIndicator'
 
 export default function Home() {
   // Handle hash navigation from other pages
@@ -48,7 +48,7 @@ export default function Home() {
       <SmartStickyCTA />
       <ExitIntentPopup />
       <LiveChatWidget />
-      <ProgressIndicator />
+      {/* <ProgressIndicator /> */}
     </main>
   )
 }
