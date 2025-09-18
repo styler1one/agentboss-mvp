@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
-import { kv } from '@vercel/kv'
 import { z } from 'zod'
 
 // Initialize Resend with API key from environment
@@ -33,7 +32,7 @@ export async function POST(request: NextRequest) {
     const leadId = `lead_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
     
     // Store lead data - KV disabled due to SSL issues, using console logging
-    let kvStorageSuccess = false
+    const kvStorageSuccess = false
     console.log('KV storage disabled - using console logging for lead tracking')
     
     // Log lead data for manual processing if KV fails
