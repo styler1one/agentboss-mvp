@@ -3,6 +3,21 @@ import { kv } from '@vercel/kv'
 
 export async function GET() {
   try {
+    // Check if KV environment variables are available
+    if (!process.env.KV_REST_API_URL || !process.env.KV_REST_API_TOKEN) {
+      return NextResponse.json({
+        success: false,
+        message: 'KV database not configured. Please set up environment variables in Vercel.',
+        leads: [],
+        count: 0,
+        debug: {
+          hasKvUrl: !!process.env.KV_REST_API_URL,
+          hasKvToken: !!process.env.KV_REST_API_TOKEN,
+          nodeEnv: process.env.NODE_ENV
+        }
+      })
+    }
+
     // Get all lead IDs from the leads list
     const leadIds = await kv.lrange('leads', 0, -1)
     

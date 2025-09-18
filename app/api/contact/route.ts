@@ -33,21 +33,40 @@ export async function POST(request: NextRequest) {
     const leadId = `lead_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
     
     // Store in Vercel KV for lead tracking
+    let kvStorageSuccess = false
     try {
-      await kv.hset(leadId, {
+      // Check if KV environment variables are available
+      if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+        await kv.hset(leadId, {
+          ...validatedData,
+          status: 'new',
+          createdAt: new Date().toISOString(),
+          ip: request.ip || 'unknown',
+          userAgent: request.headers.get('user-agent') || 'unknown'
+        })
+        
+        // Add to leads list for easy retrieval
+        await kv.lpush('leads', leadId)
+        console.log(`Lead ${leadId} stored successfully in KV`)
+        kvStorageSuccess = true
+      } else {
+        console.log('KV environment variables not configured - skipping KV storage')
+      }
+    } catch (kvError) {
+      console.error('KV storage error:', kvError)
+      // Continue without KV storage - email will still work
+    }
+    
+    // Log lead data for manual processing if KV fails
+    if (!kvStorageSuccess) {
+      console.log('LEAD DATA (KV unavailable):', JSON.stringify({
+        leadId,
         ...validatedData,
         status: 'new',
         createdAt: new Date().toISOString(),
         ip: request.ip || 'unknown',
         userAgent: request.headers.get('user-agent') || 'unknown'
-      })
-      
-      // Add to leads list for easy retrieval
-      await kv.lpush('leads', leadId)
-      console.log(`Lead ${leadId} stored successfully`)
-    } catch (kvError) {
-      console.error('KV storage error:', kvError)
-      // Continue without KV storage - email will still work
+      }, null, 2))
     }
     
     // Determine email template based on variant
