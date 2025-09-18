@@ -3,11 +3,25 @@
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
+import { useRouter, usePathname } from "next/navigation"
 import { Menu, X, Shield, Zap, TrendingUp } from "lucide-react"
 import { useState } from "react"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const router = useRouter()
+  const pathname = usePathname()
+
+  const handleNavigation = (section: string) => {
+    if (pathname === '/') {
+      // On homepage, scroll to section
+      document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      // On other pages, navigate to homepage with hash
+      router.push(`/#${section}`)
+    }
+    setIsMenuOpen(false)
+  }
 
   return (
     <header className="border-b bg-white/95 backdrop-blur-sm sticky top-0 z-50">
@@ -24,21 +38,36 @@ export default function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <div className="flex items-center space-x-6">
-              <Link href="#solutions" className="text-gray-600 hover:text-agent-navy transition-colors">
+              <button 
+                onClick={() => handleNavigation('solutions')}
+                className="text-gray-600 hover:text-agent-navy transition-colors"
+              >
                 Solutions
-              </Link>
-              <Link href="#experts" className="text-gray-600 hover:text-agent-navy transition-colors">
+              </button>
+              <button 
+                onClick={() => handleNavigation('experts')}
+                className="text-gray-600 hover:text-agent-navy transition-colors"
+              >
                 Experts
-              </Link>
-              <Link href="#marketplace" className="text-gray-600 hover:text-agent-navy transition-colors">
+              </button>
+              <button 
+                onClick={() => handleNavigation('marketplace')}
+                className="text-gray-600 hover:text-agent-navy transition-colors"
+              >
                 Marketplace
-              </Link>
-              <Link href="#cases" className="text-gray-600 hover:text-agent-navy transition-colors">
+              </button>
+              <button 
+                onClick={() => handleNavigation('cases')}
+                className="text-gray-600 hover:text-agent-navy transition-colors"
+              >
                 Cases
-              </Link>
-              <Link href="#faq" className="text-gray-600 hover:text-agent-navy transition-colors">
+              </button>
+              <button 
+                onClick={() => handleNavigation('faq')}
+                className="text-gray-600 hover:text-agent-navy transition-colors"
+              >
                 FAQ
-              </Link>
+              </button>
             </div>
           </nav>
 
@@ -81,18 +110,36 @@ export default function Header() {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t">
             <nav className="flex flex-col space-y-4">
-              <Link href="#solutions" className="text-gray-600 hover:text-agent-navy">
+              <button 
+                onClick={() => handleNavigation('solutions')}
+                className="text-gray-600 hover:text-agent-navy text-left"
+              >
                 Solutions
-              </Link>
-              <Link href="#experts" className="text-gray-600 hover:text-agent-navy">
+              </button>
+              <button 
+                onClick={() => handleNavigation('experts')}
+                className="text-gray-600 hover:text-agent-navy text-left"
+              >
                 Experts
-              </Link>
-              <Link href="#marketplace" className="text-gray-600 hover:text-agent-navy">
+              </button>
+              <button 
+                onClick={() => handleNavigation('marketplace')}
+                className="text-gray-600 hover:text-agent-navy text-left"
+              >
                 Marketplace
-              </Link>
-              <Link href="#cases" className="text-gray-600 hover:text-agent-navy">
+              </button>
+              <button 
+                onClick={() => handleNavigation('cases')}
+                className="text-gray-600 hover:text-agent-navy text-left"
+              >
                 Cases
-              </Link>
+              </button>
+              <button 
+                onClick={() => handleNavigation('faq')}
+                className="text-gray-600 hover:text-agent-navy text-left"
+              >
+                FAQ
+              </button>
               <div className="flex flex-col space-y-2 pt-4">
                 <Button variant="ghost" size="sm">
                   Login

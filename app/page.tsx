@@ -1,3 +1,6 @@
+'use client'
+
+import { useEffect } from 'react'
 import Header from '@/components/Header'
 import HeroSection from '@/components/HeroSection'
 import StatsSection from '@/components/StatsSection'
@@ -15,6 +18,18 @@ import ExitIntentPopup from '@/components/ExitIntentPopup'
 // import ProgressIndicator from '@/components/ProgressIndicator'
 
 export default function Home() {
+  // Handle hash navigation from other pages
+  useEffect(() => {
+    const hash = window.location.hash.substring(1)
+    if (hash) {
+      setTimeout(() => {
+        const element = document.getElementById(hash)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 100)
+    }
+  }, [])
   return (
     <main className="min-h-screen">
       <Header />
