@@ -1,5 +1,7 @@
 'use client'
 
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -107,6 +109,7 @@ const stats = {
 export default function IndustriesOverviewPage() {
   return (
     <div className="min-h-screen bg-white">
+      <Header />
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-agent-navy via-blue-900 to-agent-blue text-white section-spacing">
         <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:50px_50px]" />
@@ -274,6 +277,8 @@ export default function IndustriesOverviewPage() {
           </div>
         </div>
       </section>
+      
+      <Footer />
     </div>
   )
 }
