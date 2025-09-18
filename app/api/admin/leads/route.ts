@@ -3,11 +3,11 @@ import { kv } from '@vercel/kv'
 
 export async function GET() {
   try {
-    // Check if KV environment variables are available
+    // Check if Redis environment variables are available
     if (!process.env.KV_REST_API_URL || !process.env.KV_REST_API_TOKEN) {
       return NextResponse.json({
         success: false,
-        message: 'KV database not configured. Please set up environment variables in Vercel.',
+        message: 'Redis database not configured. Please set up environment variables in Vercel.',
         leads: [],
         count: 0,
         debug: {
@@ -18,8 +18,26 @@ export async function GET() {
       })
     }
 
-    // Get all lead IDs from the leads list
-    const leadIds = await kv.lrange('leads', 0, -1)
+    // Try Vercel KV SDK first, then fallback to direct Redis API
+    let leadIds: string[] = []
+    
+    try {
+      leadIds = await kv.lrange('leads', 0, -1)
+    } catch (kvError) {
+      console.log('KV SDK failed, trying direct Redis API for leads list')
+      
+      // Fallback to direct Redis REST API
+      const response = await fetch(`${process.env.KV_REST_API_URL}/lrange/leads/0/-1`, {
+        headers: {
+          'Authorization': `Bearer ${process.env.KV_REST_API_TOKEN}`
+        }
+      })
+      
+      if (response.ok) {
+        const data = await response.json()
+        leadIds = data.result || []
+      }
+    }
     
     if (!leadIds || leadIds.length === 0) {
       return NextResponse.json({
@@ -33,7 +51,26 @@ export async function GET() {
     const leads = []
     for (const leadId of leadIds) {
       try {
-        const leadData = await kv.hgetall(leadId)
+        // Try KV SDK first
+        let leadData = null
+        try {
+          leadData = await kv.hgetall(leadId)
+        } catch (kvError) {
+          // Fallback to direct Redis API for individual leads
+          const response = await fetch(`${process.env.KV_REST_API_URL}/get/${leadId}`, {
+            headers: {
+              'Authorization': `Bearer ${process.env.KV_REST_API_TOKEN}`
+            }
+          })
+          
+          if (response.ok) {
+            const data = await response.json()
+            if (data.result) {
+              leadData = JSON.parse(data.result)
+            }
+          }
+        }
+        
         if (leadData && Object.keys(leadData).length > 0) {
           leads.push({
             id: leadId,

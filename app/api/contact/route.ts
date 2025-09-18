@@ -32,29 +32,66 @@ export async function POST(request: NextRequest) {
     // Generate unique ID for this lead
     const leadId = `lead_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
     
-    // Store in Vercel KV for lead tracking
+    // Store lead data in Redis
     let kvStorageSuccess = false
     try {
-      // Check if any KV environment variables are available
-      if (process.env.KV_REST_API_URL || process.env.REDIS_URL) {
-        await kv.hset(leadId, {
-          ...validatedData,
-          status: 'new',
-          createdAt: new Date().toISOString(),
-          ip: request.ip || 'unknown',
-          userAgent: request.headers.get('user-agent') || 'unknown'
-        })
-        
-        // Add to leads list for easy retrieval
-        await kv.lpush('leads', leadId)
-        console.log(`Lead ${leadId} stored successfully in KV`)
-        kvStorageSuccess = true
+      // Try Vercel KV SDK first
+      if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+        try {
+          await kv.hset(leadId, {
+            ...validatedData,
+            status: 'new',
+            createdAt: new Date().toISOString(),
+            ip: request.ip || 'unknown',
+            userAgent: request.headers.get('user-agent') || 'unknown'
+          })
+          
+          await kv.lpush('leads', leadId)
+          console.log(`Lead ${leadId} stored successfully via KV SDK`)
+          kvStorageSuccess = true
+        } catch (kvError) {
+          console.log('KV SDK failed, trying direct Redis API:', kvError)
+          
+          // Fallback to direct Redis REST API
+          const leadData = {
+            ...validatedData,
+            status: 'new',
+            createdAt: new Date().toISOString(),
+            ip: request.ip || 'unknown',
+            userAgent: request.headers.get('user-agent') || 'unknown'
+          }
+          
+          // Store lead data
+          const storeResponse = await fetch(`${process.env.KV_REST_API_URL}/set/${leadId}`, {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${process.env.KV_REST_API_TOKEN}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ value: JSON.stringify(leadData) })
+          })
+          
+          if (storeResponse.ok) {
+            // Add to leads list
+            await fetch(`${process.env.KV_REST_API_URL}/lpush/leads`, {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${process.env.KV_REST_API_TOKEN}`,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ value: leadId })
+            })
+            
+            console.log(`Lead ${leadId} stored successfully via direct Redis API`)
+            kvStorageSuccess = true
+          }
+        }
       } else {
-        console.log('KV environment variables not configured - skipping KV storage')
+        console.log('Redis environment variables not configured - skipping storage')
       }
-    } catch (kvError) {
-      console.error('KV storage error:', kvError)
-      // Continue without KV storage - email will still work
+    } catch (storageError) {
+      console.error('Lead storage error:', storageError)
+      // Continue without storage - email will still work
     }
     
     // Log lead data for manual processing if KV fails
