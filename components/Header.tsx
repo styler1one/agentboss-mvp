@@ -38,19 +38,19 @@ export default function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <div className="flex items-center space-x-6">
-              <button 
-                onClick={() => handleNavigation('solutions')}
+              <Link
+                href="/solutions"
                 className="text-gray-600 hover:text-agent-navy transition-colors"
               >
                 Solutions
-              </button>
-              <Link 
+              </Link>
+              <Link
                 href="/industries"
                 className="text-gray-600 hover:text-agent-navy transition-colors"
               >
                 Industries
               </Link>
-              <button 
+              <button
                 onClick={() => handleNavigation('experts')}
                 className="text-gray-600 hover:text-agent-navy transition-colors"
               >
