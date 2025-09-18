@@ -61,8 +61,13 @@ export async function POST(request: NextRequest) {
             userAgent: request.headers.get('user-agent') || 'unknown'
           }
           
-          // Store lead data
-          const storeResponse = await fetch(`${process.env.KV_REST_API_URL}/set/${leadId}`, {
+          // Store lead data via REST API (if URL is properly formatted)
+          let restApiUrl = process.env.KV_REST_API_URL
+          if (restApiUrl && !restApiUrl.startsWith('http')) {
+            restApiUrl = `https://${restApiUrl}`
+          }
+          
+          const storeResponse = await fetch(`${restApiUrl}/set/${leadId}`, {
             method: 'POST',
             headers: {
               'Authorization': `Bearer ${process.env.KV_REST_API_TOKEN}`,

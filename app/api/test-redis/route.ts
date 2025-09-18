@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 export async function GET() {
   try {
     // Test direct Redis connection via REST API
-    const redisUrl = process.env.KV_REST_API_URL
+    let redisUrl = process.env.KV_REST_API_URL
     const redisToken = process.env.KV_REST_API_TOKEN
     
     if (!redisUrl || !redisToken) {
@@ -12,10 +12,22 @@ export async function GET() {
         message: 'Redis REST API credentials missing',
         environment: {
           hasUrl: !!redisUrl,
-          hasToken: !!redisToken
+          hasToken: !!redisToken,
+          kvRestApiUrl: process.env.KV_REST_API_URL,
+          availableVars: Object.keys(process.env).filter(key => 
+            key.includes('KV') || key.includes('REDIS')
+          )
         }
       })
     }
+
+    // Ensure URL has https:// prefix and correct format
+    if (!redisUrl.startsWith('http')) {
+      redisUrl = `https://${redisUrl}`
+    }
+    
+    // Remove any trailing slashes
+    redisUrl = redisUrl.replace(/\/$/, '')
 
     // Test SET operation
     const testKey = `test_${Date.now()}`
