@@ -2,7 +2,7 @@
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { TrendingUp, Users, CheckCircle, Clock, Euro, Globe } from "lucide-react"
+import { TrendingUp, CheckCircle, Clock, Euro, Globe } from "lucide-react"
 import { useState, useEffect } from "react"
 
 export default function StatsSection() {

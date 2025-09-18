@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Star, MapPin, Clock, Award, Users, Filter, Search } from "lucide-react"
+import { Star, MapPin, Clock, Award, Users, Search } from "lucide-react"
 
 const experts = [
   {

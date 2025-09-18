@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
-import { Star, Download, Play, Shield, Zap, Users, TrendingUp, CheckCircle, Eye } from "lucide-react"
+import { Star, Download, Play, Shield, Zap, Users, CheckCircle, Eye } from "lucide-react"
 
 const agents = [
   {
