@@ -32,33 +32,9 @@ export async function POST(request: NextRequest) {
     // Generate unique ID for this lead
     const leadId = `lead_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
     
-    // Store lead data in Redis
+    // Store lead data - KV disabled due to SSL issues, using console logging
     let kvStorageSuccess = false
-    try {
-      // Try Vercel KV SDK first
-      if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
-        try {
-          await kv.hset(leadId, {
-            ...validatedData,
-            status: 'new',
-            createdAt: new Date().toISOString(),
-            ip: request.ip || 'unknown',
-            userAgent: request.headers.get('user-agent') || 'unknown'
-          })
-          
-          await kv.lpush('leads', leadId)
-          console.log(`Lead ${leadId} stored successfully via KV SDK`)
-          kvStorageSuccess = true
-        } catch {
-          console.log('KV SDK failed, skipping Redis storage')
-        }
-      } else {
-        console.log('Redis environment variables not configured - skipping storage')
-      }
-    } catch (storageError) {
-      console.error('Lead storage error:', storageError)
-      // Continue without storage - email will still work
-    }
+    console.log('KV storage disabled - using console logging for lead tracking')
     
     // Log lead data for manual processing if KV fails
     if (!kvStorageSuccess) {
