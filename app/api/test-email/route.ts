@@ -18,7 +18,7 @@ export async function GET() {
 
     // Test email
     const testEmail = {
-      from: 'onboarding@resend.dev', // Resend's verified domain
+      from: 'AgentBoss.nl <noreply@agentboss.nl>', // Now verified!
       to: ['info@agentboss.nl'],
       subject: 'Test Email - AgentBoss.nl',
       html: `
