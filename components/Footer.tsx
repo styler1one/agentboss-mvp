@@ -1,9 +1,17 @@
+'use client'
+
+import { useState } from "react"
+import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { Shield, Mail, Phone, MapPin, Linkedin, Twitter, Github } from "lucide-react"
+import { Mail, Phone, MapPin, Shield, Linkedin, Twitter, Github } from "lucide-react"
+import LegalModal from "@/components/LegalModal"
 
 export default function Footer() {
+  const [legalModal, setLegalModal] = useState<{isOpen: boolean, type: 'privacy' | 'terms' | 'gdpr' | 'cookies'}>({
+    isOpen: false,
+    type: 'privacy'
+  })
   return (
     <footer className="bg-agent-navy text-white">
       <div className="container mx-auto px-4 py-16">
@@ -35,11 +43,11 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="font-semibold text-lg">Solutions</h4>
             <ul className="space-y-2 text-sm text-blue-200">
-              <li><Link href="#" className="hover:text-white transition-colors">Agent Factory</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Expert Network</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Agent Marketplace</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Custom Development</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Compliance Center</Link></li>
+              <li><Link href="#solutions" className="hover:text-white transition-colors">Agent Factory</Link></li>
+              <li><Link href="#experts" className="hover:text-white transition-colors">Expert Network</Link></li>
+              <li><Link href="#marketplace" className="hover:text-white transition-colors">Agent Marketplace</Link></li>
+              <li><Link href="#solutions" className="hover:text-white transition-colors">Custom Development</Link></li>
+              <li><Link href="#solutions" className="hover:text-white transition-colors">Compliance Center</Link></li>
             </ul>
           </div>
 
@@ -47,11 +55,11 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="font-semibold text-lg">Industries</h4>
             <ul className="space-y-2 text-sm text-blue-200">
-              <li><Link href="#" className="hover:text-white transition-colors">Finance & Banking</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Healthcare</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Manufacturing</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Technology & SaaS</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">E-commerce</Link></li>
+              <li><Link href="#cases" className="hover:text-white transition-colors">Finance & Banking</Link></li>
+              <li><Link href="#cases" className="hover:text-white transition-colors">Healthcare</Link></li>
+              <li><Link href="#cases" className="hover:text-white transition-colors">Manufacturing</Link></li>
+              <li><Link href="#cases" className="hover:text-white transition-colors">Technology & SaaS</Link></li>
+              <li><Link href="#cases" className="hover:text-white transition-colors">E-commerce</Link></li>
             </ul>
           </div>
 
@@ -95,14 +103,41 @@ export default function Footer() {
             </div>
             
             <div className="flex space-x-6 text-sm text-blue-200">
-              <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
-              <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>
-              <Link href="#" className="hover:text-white transition-colors">GDPR</Link>
-              <Link href="#" className="hover:text-white transition-colors">Cookies</Link>
+              <button 
+                onClick={() => setLegalModal({isOpen: true, type: 'privacy'})}
+                className="hover:text-white transition-colors"
+              >
+                Privacy Policy
+              </button>
+              <button 
+                onClick={() => setLegalModal({isOpen: true, type: 'terms'})}
+                className="hover:text-white transition-colors"
+              >
+                Terms of Service
+              </button>
+              <button 
+                onClick={() => setLegalModal({isOpen: true, type: 'gdpr'})}
+                className="hover:text-white transition-colors"
+              >
+                GDPR
+              </button>
+              <button 
+                onClick={() => setLegalModal({isOpen: true, type: 'cookies'})}
+                className="hover:text-white transition-colors"
+              >
+                Cookies
+              </button>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Legal Modal */}
+      <LegalModal
+        isOpen={legalModal.isOpen}
+        onClose={() => setLegalModal({...legalModal, isOpen: false})}
+        type={legalModal.type}
+      />
     </footer>
   )
 }
