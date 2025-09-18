@@ -49,47 +49,8 @@ export async function POST(request: NextRequest) {
           await kv.lpush('leads', leadId)
           console.log(`Lead ${leadId} stored successfully via KV SDK`)
           kvStorageSuccess = true
-        } catch (kvError) {
-          console.log('KV SDK failed, trying direct Redis API:', kvError)
-          
-          // Fallback to direct Redis REST API
-          const leadData = {
-            ...validatedData,
-            status: 'new',
-            createdAt: new Date().toISOString(),
-            ip: request.ip || 'unknown',
-            userAgent: request.headers.get('user-agent') || 'unknown'
-          }
-          
-          // Store lead data via REST API (if URL is properly formatted)
-          let restApiUrl = process.env.KV_REST_API_URL
-          if (restApiUrl && !restApiUrl.startsWith('http')) {
-            restApiUrl = `https://${restApiUrl}`
-          }
-          
-          const storeResponse = await fetch(`${restApiUrl}/set/${leadId}`, {
-            method: 'POST',
-            headers: {
-              'Authorization': `Bearer ${process.env.KV_REST_API_TOKEN}`,
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ value: JSON.stringify(leadData) })
-          })
-          
-          if (storeResponse.ok) {
-            // Add to leads list
-            await fetch(`${process.env.KV_REST_API_URL}/lpush/leads`, {
-              method: 'POST',
-              headers: {
-                'Authorization': `Bearer ${process.env.KV_REST_API_TOKEN}`,
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({ value: leadId })
-            })
-            
-            console.log(`Lead ${leadId} stored successfully via direct Redis API`)
-            kvStorageSuccess = true
-          }
+        } catch {
+          console.log('KV SDK failed, skipping Redis storage')
         }
       } else {
         console.log('Redis environment variables not configured - skipping storage')

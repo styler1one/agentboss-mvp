@@ -34,9 +34,17 @@ export default function LeadsPage() {
       const response = await fetch('/api/admin/leads')
       if (!response.ok) throw new Error('Failed to fetch leads')
       const data = await response.json()
-      setLeads(data.leads || [])
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load leads')
+      
+      if (data.success === false && data.message?.includes('Redis')) {
+        // Redis not available, show helpful message
+        setError('Redis database not available. Leads are being captured via email notifications and Vercel function logs.')
+        setLeads([])
+      } else {
+        setLeads(data.leads || [])
+      }
+    } catch {
+      setError('Database connection unavailable. Leads are being captured via email notifications and logged in Vercel function logs for manual processing.')
+      setLeads([])
     } finally {
       setLoading(false)
     }
