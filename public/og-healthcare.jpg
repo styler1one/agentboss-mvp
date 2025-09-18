@@ -1,0 +1,26 @@
+<!-- SVG Placeholder for Healthcare OpenGraph Image -->
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#166534;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grad1)"/>
+  <text x="600" y="220" font-family="Arial, sans-serif" font-size="44" font-weight="bold" text-anchor="middle" fill="white">
+    AI-Agents Healthcare &amp; Life Sciences
+  </text>
+  <text x="600" y="280" font-family="Arial, sans-serif" font-size="32" text-anchor="middle" fill="#e5e7eb">
+    AgentBoss.nl
+  </text>
+  <text x="600" y="340" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#fbbf24">
+    €1.8M Besparing • 60% Minder Admin • NEN 7510 Compliant
+  </text>
+  <text x="600" y="400" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#e5e7eb">
+    Patiëntenzorg • Diagnostiek • 24/7 Monitoring
+  </text>
+  <circle cx="200" cy="500" r="35" fill="#ffffff" opacity="0.2"/>
+  <path d="M 190 500 L 210 500 M 200 490 L 200 510" stroke="#ffffff" stroke-width="4" opacity="0.4"/>
+  <circle cx="1000" cy="480" r="30" fill="#ffffff" opacity="0.2"/>
+  <path d="M 992 480 L 1008 480 M 1000 472 L 1000 488" stroke="#ffffff" stroke-width="3" opacity="0.4"/>
+</svg>
