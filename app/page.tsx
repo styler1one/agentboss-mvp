@@ -4,21 +4,18 @@ import { useEffect } from 'react'
 import Header from '@/components/Header'
 import HeroSection from '@/components/HeroSection'
 import StatsSection from '@/components/StatsSection'
-import SolutionsSection from '@/components/SolutionsSection'
 import InteractiveAssessment from '@/components/InteractiveAssessment'
-import ROICalculator from '@/components/ROICalculator'
-import IndustryShowcase from '@/components/IndustryShowcase'
-import TestimonialsSection from '@/components/TestimonialsSection'
-import ExpertNetwork from '@/components/ExpertNetwork'
-import AgentMarketplace from '@/components/AgentMarketplace'
-import CaseStudiesSection from '@/components/CaseStudiesSection'
+import SolutionsSection from '@/components/SolutionsSection'
+import IndustryROIShowcase from '@/components/IndustryROIShowcase'
+import SocialProofSection from '@/components/SocialProofSection'
+import ProductDeepDive from '@/components/ProductDeepDive'
 import ComparisonTool from '@/components/ComparisonTool'
 import FAQSection from '@/components/FAQSection'
 import Footer from '@/components/Footer'
-import StickyCTA from '@/components/StickyCTA'
+import SmartStickyCTA from '@/components/SmartStickyCTA'
 import ExitIntentPopup from '@/components/ExitIntentPopup'
 import LiveChatWidget from '@/components/LiveChatWidget'
-// import ProgressIndicator from '@/components/ProgressIndicator'
+import ProgressIndicator from '@/components/ProgressIndicator'
 
 export default function Home() {
   // Handle hash navigation from other pages
@@ -36,25 +33,22 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <Header />
-      <HeroSection />
+      <div id="hero"><HeroSection /></div>
       <StatsSection />
-      <InteractiveAssessment />
-      <SolutionsSection />
-      <IndustryShowcase />
-      <ROICalculator />
-      <TestimonialsSection />
-      <ExpertNetwork />
-      <AgentMarketplace />
-      <CaseStudiesSection />
-      <ComparisonTool />
-      <FAQSection />
+      <div id="assessment"><InteractiveAssessment /></div>
+      <div id="solutions"><SolutionsSection /></div>
+      <div id="industry"><IndustryROIShowcase /></div>
+      <div id="social"><SocialProofSection /></div>
+      <div id="experts"><ProductDeepDive /></div>
+      <div id="comparison"><ComparisonTool /></div>
+      <div id="faq"><FAQSection /></div>
       <Footer />
       
       {/* UX Enhancement Components */}
-      <StickyCTA />
+      <SmartStickyCTA />
       <ExitIntentPopup />
       <LiveChatWidget />
-      {/* <ProgressIndicator /> */}
+      <ProgressIndicator />
     </main>
   )
 }

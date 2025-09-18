@@ -7,39 +7,42 @@ import { CheckCircle, Circle } from "lucide-react"
 
 const sections = [
   { id: "hero", name: "Start", description: "Welkom bij AgentBoss" },
-  { id: "stats", name: "Cijfers", description: "Live platform statistieken" },
-  { id: "solutions", name: "Oplossingen", description: "Onze 4 kernoplossingen" },
-  { id: "roi-calculator", name: "ROI", description: "Bereken jouw besparing" },
-  { id: "experts", name: "Experts", description: "Top 5% AI specialisten" },
-  { id: "marketplace", name: "Marketplace", description: "Kant-en-klare agents" },
+  { id: "assessment", name: "Assessment", description: "2-min AI assessment" },
+  { id: "solutions", name: "Solutions", description: "Onze 4 kernoplossingen" },
+  { id: "industry", name: "ROI", description: "Industry-specific ROI" },
+  { id: "social", name: "Proof", description: "Success stories" },
+  { id: "experts", name: "Products", description: "Experts & Agents" },
+  { id: "comparison", name: "Compare", description: "Waarom AgentBoss" },
   { id: "faq", name: "FAQ", description: "Veelgestelde vragen" }
 ]
 
 export default function ProgressIndicator() {
+  const [scrollProgress, setScrollProgress] = useState(0)
   const [currentSection, setCurrentSection] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show after scrolling past hero
-      setIsVisible(window.scrollY > 400)
+      const scrollY = window.scrollY
+      const windowHeight = window.innerHeight
+      const totalHeight = document.documentElement.scrollHeight - windowHeight
+      const progress = Math.min((scrollY / totalHeight) * 100, 100)
+      
+      setScrollProgress(progress)
+      setIsVisible(scrollY > windowHeight * 0.3)
 
       // Determine current section
-      const sectionElements = sections.map(section => 
-        document.getElementById(section.id)
-      ).filter(Boolean)
-
-      let current = 0
-      sectionElements.forEach((element, index) => {
+      let activeIndex = 0
+      sections.forEach((section, index) => {
+        const element = document.getElementById(section.id)
         if (element) {
           const rect = element.getBoundingClientRect()
-          if (rect.top <= window.innerHeight / 2) {
-            current = index
+          if (rect.top <= windowHeight / 2) {
+            activeIndex = index
           }
         }
       })
-      
-      setCurrentSection(current)
+      setCurrentSection(activeIndex)
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -48,13 +51,11 @@ export default function ProgressIndicator() {
 
   if (!isVisible) return null
 
-  const progress = ((currentSection + 1) / sections.length) * 100
-
   return (
-    <div className="fixed top-20 right-4 z-40 hidden lg:block">
-      <div className="bg-white rounded-lg shadow-lg border p-4 w-64">
+    <div className="fixed top-4 right-4 z-50">
+      <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-3 border">
         {/* Progress Bar */}
-        <div className="mb-4">
+        <div className="mb-3">
           <div className="flex justify-between items-center mb-2">
             <span className="text-sm font-medium text-agent-navy">
               Voortgang
@@ -63,9 +64,9 @@ export default function ProgressIndicator() {
               {currentSection + 1}/{sections.length}
             </Badge>
           </div>
-          <Progress value={progress} className="h-2" />
+          <Progress value={scrollProgress} className="h-2" />
           <div className="text-xs text-gray-500 mt-1">
-            {Math.round(progress)}% voltooid
+            {Math.round(scrollProgress)}% voltooid
           </div>
         </div>
 
