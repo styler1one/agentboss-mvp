@@ -17,6 +17,7 @@ interface ContactModalProps {
 
 export default function ContactModal({ isOpen, onClose, type, title }: ContactModalProps) {
   const [step, setStep] = useState(1)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -79,13 +80,48 @@ export default function ContactModal({ isOpen, onClose, type, title }: ContactMo
   const config = getModalConfig()
   const IconComponent = config.icon
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (step < 3) {
       setStep(step + 1)
     } else {
-      // Simulate form submission
-      setStep(4)
+      // Real form submission to API
+      setIsSubmitting(true)
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            company: formData.company,
+            phone: formData.phone,
+            industry: formData.industry,
+            solution: formData.challenge,
+            budget: formData.budget,
+            message: `${type} aanvraag - ${formData.challenge || 'Geen specifieke uitdaging opgegeven'}. Timeline: ${formData.timeline || 'Niet opgegeven'}. Bedrijfsgrootte: ${formData.employees || 'Niet opgegeven'}.`,
+            variant: type,
+            source: `ContactModal-${type}`,
+            urgency: formData.timeline === 'asap' ? 'high' : formData.timeline === '1-3months' ? 'medium' : 'low',
+            timestamp: new Date().toISOString()
+          }),
+        })
+
+        const result = await response.json()
+        
+        if (response.ok && result.success) {
+          setStep(4) // Show success page
+        } else {
+          throw new Error(result.message || 'Er ging iets mis bij het versturen')
+        }
+      } catch (error) {
+        console.error('Form submission error:', error)
+        alert('Er ging iets mis bij het versturen van je aanvraag. Probeer het opnieuw.')
+      } finally {
+        setIsSubmitting(false)
+      }
     }
   }
 
@@ -374,9 +410,9 @@ export default function ContactModal({ isOpen, onClose, type, title }: ContactMo
                   type="submit" 
                   variant="agent" 
                   className="flex-1"
-                  disabled={!formData.name || !formData.email || !formData.company}
+                  disabled={!formData.name || !formData.email || !formData.company || isSubmitting}
                 >
-                  {step === 3 ? 'Verstuur Aanvraag' : 'Volgende'}
+                  {isSubmitting ? 'Versturen...' : (step === 3 ? 'Verstuur Aanvraag' : 'Volgende')}
                 </Button>
               </div>
             </form>

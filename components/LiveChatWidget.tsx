@@ -121,17 +121,53 @@ export default function LiveChatWidget() {
     return getRandomResponse()
   }
 
-  const handleContactSubmit = () => {
-    const contactMessage: Message = {
-      id: Date.now().toString(),
-      text: `Bedankt ${contactData.name}! Ik heb je gegevens doorgestuurd naar onze experts. Je krijgt binnen 2 uur contact van ons team! 🎉`,
-      sender: 'bot',
-      timestamp: new Date()
+  const handleContactSubmit = async () => {
+    try {
+      // Submit to API
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: contactData.name,
+          email: contactData.email,
+          company: 'Niet opgegeven (via chat)',
+          phone: contactData.phone,
+          message: 'Contact aanvraag via live chat widget',
+          variant: 'consultation',
+          source: 'LiveChatWidget',
+          urgency: 'medium',
+          timestamp: new Date().toISOString()
+        }),
+      })
+
+      const result = await response.json()
+      
+      if (response.ok && result.success) {
+        const contactMessage: Message = {
+          id: Date.now().toString(),
+          text: `Bedankt ${contactData.name}! Ik heb je gegevens doorgestuurd naar onze experts. Je krijgt binnen 2 uur contact van ons team! 🎉`,
+          sender: 'bot',
+          timestamp: new Date()
+        }
+        
+        setMessages(prev => [...prev, contactMessage])
+        setShowContactForm(false)
+        setContactData({ name: '', email: '', phone: '' })
+      } else {
+        throw new Error(result.message || 'Er ging iets mis')
+      }
+    } catch (error) {
+      console.error('Chat contact submission error:', error)
+      const errorMessage: Message = {
+        id: Date.now().toString(),
+        text: `Sorry, er ging iets mis bij het versturen van je gegevens. Probeer het opnieuw of bel ons direct op +31 20 123 4567.`,
+        sender: 'bot',
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, errorMessage])
     }
-    
-    setMessages(prev => [...prev, contactMessage])
-    setShowContactForm(false)
-    setContactData({ name: '', email: '', phone: '' })
   }
 
   if (!isOpen) {
