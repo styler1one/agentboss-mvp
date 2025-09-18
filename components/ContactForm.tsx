@@ -79,7 +79,9 @@ export default function ContactForm({
       const result = await response.json()
 
       if (!response.ok) {
-        throw new Error(result.message || 'Er ging iets mis bij het versturen van je bericht')
+        const errorMessage = result.message || 'Er ging iets mis bij het versturen van je bericht'
+        const debugInfo = result.debug ? ` (Debug: ${result.debug})` : ''
+        throw new Error(errorMessage + debugInfo)
       }
 
       setIsSubmitted(true)

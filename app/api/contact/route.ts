@@ -1,10 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
-import { kv } from '@vercel/kv'
 import { z } from 'zod'
 
 // Initialize Resend with API key from environment
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
+
+// Initialize KV with fallback for local development
+let kv: any = null
+try {
+  if (process.env.KV_URL) {
+    const { kv: vercelKv } = require('@vercel/kv')
+    kv = vercelKv
+  }
+} catch (error) {
+  console.log('KV not available in development mode')
+}
 
 // Validation schema
 const contactSchema = z.object({
@@ -32,17 +42,26 @@ export async function POST(request: NextRequest) {
     // Generate unique ID for this lead
     const leadId = `lead_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
     
-    // Store in Vercel KV for lead tracking
-    await kv.hset(leadId, {
-      ...validatedData,
-      status: 'new',
-      createdAt: new Date().toISOString(),
-      ip: request.ip || 'unknown',
-      userAgent: request.headers.get('user-agent') || 'unknown'
-    })
-    
-    // Add to leads list for easy retrieval
-    await kv.lpush('leads', leadId)
+    // Store in Vercel KV for lead tracking (if available)
+    if (kv) {
+      try {
+        await kv.hset(leadId, {
+          ...validatedData,
+          status: 'new',
+          createdAt: new Date().toISOString(),
+          ip: request.ip || 'unknown',
+          userAgent: request.headers.get('user-agent') || 'unknown'
+        })
+        
+        // Add to leads list for easy retrieval
+        await kv.lpush('leads', leadId)
+      } catch (kvError) {
+        console.error('KV storage error:', kvError)
+        // Continue without KV storage - email will still work
+      }
+    } else {
+      console.log('KV not available - lead stored in logs only')
+    }
     
     // Determine email template based on variant
     const getEmailTemplate = (variant: string, data: typeof validatedData) => {
@@ -199,9 +218,17 @@ export async function POST(request: NextRequest) {
       }, { status: 400 })
     }
     
+    // Log detailed error for debugging
+    console.error('Detailed error:', {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined,
+      timestamp: new Date().toISOString()
+    })
+    
     return NextResponse.json({
       success: false,
-      message: 'Er ging iets mis bij het versturen van je bericht. Probeer het opnieuw.'
+      message: 'Er ging iets mis bij het versturen van je bericht. Probeer het opnieuw.',
+      debug: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.message : 'Unknown error') : undefined
     }, { status: 500 })
   }
 }
