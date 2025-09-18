@@ -50,14 +50,13 @@ export default function HeroSection() {
             {/* Main Headline */}
             <div className="space-y-4">
               <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
-                Stop met{" "}
-                <span className="text-red-400">gefaalde AI projecten</span>{" "}
-                <br />Start met{" "}
-                <span className="gradient-text">gegarandeerd succes</span>
+                Van AI-chaos naar{" "}
+                <span className="gradient-text">AI-succes</span>{" "}
+                in 30 dagen
               </h1>
               <p className="text-xl text-blue-100 leading-relaxed">
-                <strong>78% van AI projecten faalt.</strong> Wij garanderen succes met werkende AI-agents 
-                binnen 30 dagen of <strong>100% geld terug</strong>. Geen technische kennis vereist.
+                Europa's eerste <strong>gegarandeerde AI-agent delivery platform</strong>. 
+                Werkende agent binnen 30 werkdagen of 100% geld terug.
               </p>
             </div>
 
